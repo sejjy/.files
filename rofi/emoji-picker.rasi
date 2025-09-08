@@ -1,0 +1,100 @@
+/* emoji picker */
+
+@theme "~/.config/rofi/theme.rasi"
+
+configuration {
+	font:					"JetBrainsMono Nerd Font 12";
+	display-emoji:			" ";
+
+}
+
+/* window */
+
+window {
+	width:					375px;
+	border:					4px;
+	border-radius:			12px;
+	border-color:			@main-br;
+	background-color:		@main-bg;
+	children:				[ mainbox ];
+}
+
+mainbox {
+	spacing:				0;
+	background-color:		@main-br;
+	text-color:				@main-fg;
+	children:				[ textbox-custom, listview, inputbar ];
+}
+
+textbox-custom {
+	horizontal-align:		0.5;
+	padding:				1px 0;
+	expand:					false;
+	background-color:		@select-bg;
+	text-color:				@select-fg;
+	expand:					false;
+	content:				"󰱱 Emojis";
+}
+
+/* list */
+
+listview {
+	border:					2px 0 0 0;
+	border-radius:			10px;
+	border-color:			@main-br;
+	lines:					4;
+	columns:				5;
+	fixed-columns:			true;
+	dynamic:				false;
+	cycle:					false;
+	margin:					0 0 -2px;
+	padding:				8px 8px 54px;
+	background-color:		@main-bg;
+}
+
+element {
+	padding:				8px;
+	cursor:					pointer;
+	background-color:		inherit;
+	text-color:				@main-fg;
+}
+
+element selected active,
+element selected normal {
+	border-radius:			8px;
+	background-color:		@select-bg;
+	text-color:				@select-fg;
+}
+
+element-text {
+	font:					"JetBrainsMono Nerd Font 18";
+	padding:				10px 0 6px 11px;
+	cursor:					inherit;
+	background-color:		inherit;
+	text-color:				inherit;
+}
+
+/* input */
+
+inputbar {
+	margin:					-44px 8px 8px;
+	border-radius:			8px;
+	spacing:				inherit;
+	background-color:		@input-bg;
+	text-color:				inherit;
+	children:				[ prompt, entry ];
+}
+
+prompt {
+	padding:				8px 6px 8px 12px;
+	background-color:		inherit;
+	text-color:				inherit;
+}
+
+entry {
+	placeholder:			"Search";
+	padding:				8px 12px 8px 0;
+	cursor:					text;
+	background-color:		inherit;
+	text-color:				inherit;
+}
