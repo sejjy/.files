@@ -76,11 +76,11 @@
   progress_bar_corners = all
 
   # Corner radius for the icon image.
-  icon_corner_radius = 0
+  icon_corner_radius = 6
 
   # Define which corners to round when drawing the icon image. If icon_corner_radius
   # is set to 0 this option will be ignored.
-  icon_corners = all
+  icon_corners = left
 
   # Show how many messages are currently hidden (because of
   # notification_limit).
@@ -101,17 +101,17 @@
   padding = 8
 
   # Horizontal padding.
-  horizontal_padding = 10
+  horizontal_padding = 8
 
   # Padding between text and icon.
   text_icon_padding = 0
 
   # Defines width in pixels of frame around the notification window.
   # Set to 0 to disable.
-  frame_width = 3
+  frame_width = 4
 
   # Defines color of the frame around the notification window.
-  frame_color = "#cdd6f4"
+  frame_color = "#b4befe"
 
   # Size of gap to display between notifications - requires a compositor.
   # If value is greater than 0, separator_height will be ignored and a border
@@ -340,15 +340,15 @@
 [urgency_low]
   # IMPORTANT: colors have to be defined in quotation marks.
   # Otherwise the "#" and following would be interpreted as a comment.
-  background = "#1e1e2e"
-  foreground = "#cdd6f4"
+  background = "#11111b"
+  foreground = "#b4befe"
   timeout = 3
   # Icon for notifications with low urgency
   # default_icon = state-information
 
 [urgency_normal]
-  background = "#1e1e2e"
-  foreground = "#cdd6f4"
+  background = "#11111b"
+  foreground = "#b4befe"
   highlight = "#89b4fa"
   timeout = 5
   # override_pause_level = 30
@@ -356,7 +356,7 @@
   # default_icon = state-information
 
 [urgency_critical]
-  background = "#1e1e2e"
+  background = "#11111b"
   foreground = "#f38ba8"
   frame_color = "#f38ba8"
   timeout = 0

@@ -1,30 +1,37 @@
 #!/usr/bin/env bash
 
-# this script removes orphaned packages and clears package cache for both pacman and yay.
-# it keeps one (1) current and two (2) old versions of each package.
+# This script removes orphaned packages and
+# clears package cache for both pacman and yay.
+# It keeps one (1) current and two (2) old versions of each package.
+
+red='\033[1;31m'
+green='\033[1;32m'
+blue='\033[1;34m'
+reset='\033[0m'
 
 YAY_CACHE_DIR="$HOME/.cache/yay"
 
-# remove orphaned packages
-echo -e "\n\033[1;34mRemoving orphaned packages...\033[0m"
-orphans=$(pacman -Qtdq)
-if [[ -n "$orphans" ]]; then
-  sudo pacman -Rns "$orphans"
+echo -e "\n${blue}Removing orphaned packages...${reset}"
+
+orphaned=$(pacman -Qtdq)
+
+if [[ -n "$orphaned" ]]; then
+	sudo pacman -Rns "$orphaned"
 else
-  echo "No orphaned packages found."
+	echo 'No orphaned packages found.'
 fi
 
-# clear package cache
-echo -e "\n\033[1;34mClearing package cache...\033[0m"
+echo -e "\n${blue}Clearing package cache...${reset}"
+
 sudo paccache -rk2 2>/dev/null
-sudo paccache -ruk0 2>/dev/null # remove all for uninstalled
+sudo paccache -ruk0 2>/dev/null
 
-# prune old AUR package cache
-echo -e "\n\033[1;34mPruning old AUR package cache...\033[0m"
+echo -e "\n${blue}Pruning old AUR package cache...${reset}"
+
 if [[ -d "$YAY_CACHE_DIR" ]]; then
-  paccache -rk2 --cachedir "$YAY_CACHE_DIR"
+	paccache -rk2 --cachedir "$YAY_CACHE_DIR"
 else
-  echo -e "\033[1;31mYay cache directory not found.\033[0m"
+	echo -e "\n${red}Yay cache directory not found.${reset}"
 fi
 
-echo -e "\n\033[1;32mCleanup complete!\033[0m"
+echo -e "\n${green}Cleanup complete!${reset}"

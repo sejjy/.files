@@ -1,41 +1,28 @@
 #!/usr/bin/env bash
 
-# save directory
-SCREENSHOT_DIR="$HOME/Pictures/Screenshots"
-DISPLAY_PATH="${SCREENSHOT_DIR#"$HOME"/}"
+DIRNAME="$HOME/Pictures/Screenshots"
 
 # find the next available filename
 find_next() {
-  i=1
-  while [ -e "$SCREENSHOT_DIR/Screenshot ($i).png" ]; do
-    i=$((i + 1))
-  done
-  echo "Screenshot ($i).png"
+	local i=1
+
+	while [[ -e "$DIRNAME/Screenshot ($i).png" ]]; do
+		i=$((i + 1))
+	done
+
+	echo "Screenshot ($i).png"
 }
 
-# screenshot type
-case "$1" in
-"screen")
-  # all visible outputs
-  FILENAME=$(find_next)
-  grimblast copysave screen "$SCREENSHOT_DIR/$FILENAME"
-  ;;
-"area")
-  # manually select a region or window
-  FILENAME=$(find_next)
-  grimblast --freeze copysave area "$SCREENSHOT_DIR/$FILENAME"
-  ;;
-*)
-  echo "Invalid argument"
-  exit 1
-  ;;
+filename=$(find_next)
+
+format=$1
+case $format in
+	'screen') grimblast copysave screen "$DIRNAME/$filename" ;;
+	'area') grimblast --freeze copysave area "$DIRNAME/$filename" ;;
 esac
 
-# check if the file is non-empty (valid screenshot)
-if [ -s "$SCREENSHOT_DIR/$FILENAME" ]; then
-  # notification
-  notify-send -i "$SCREENSHOT_DIR/$FILENAME" "$FILENAME saved in ~/$DISPLAY_PATH"
+if [[ -s "$DIRNAME/$filename" ]]; then
+	notify-send -i "$DIRNAME/$filename" "$filename saved in $DIRNAME"
 else
-  # if the file is empty, remove it
-  rm "$SCREENSHOT_DIR/$FILENAME"
+	rm "$DIRNAME/$filename"
 fi
