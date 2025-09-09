@@ -37,7 +37,7 @@ return {
 					artisan = { glyph = "󰫐", hl = "MiniIconsRed" },
 					["docker-compose.yml"] = { glyph = "󰡨", hl = "MiniIconsBlue" },
 					["eslint.config.js"] = { glyph = "󰱺", hl = "MiniIconsPurple" },
-					["init.lua"] = { glyph = "" },
+					["init.lua"] = { glyph = "󰢱", hl = "MiniIconsAzure" },
 					LICENSE = { glyph = "", hl = "MiniIconsOrange" },
 					["LICENSE.md"] = { glyph = "", hl = "MiniIconsOrange" },
 					["LICENSE.txt"] = { glyph = "", hl = "MiniIconsOrange" },

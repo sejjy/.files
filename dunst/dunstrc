@@ -101,7 +101,7 @@
   padding = 8
 
   # Horizontal padding.
-  horizontal_padding = 8
+  horizontal_padding = 10
 
   # Padding between text and icon.
   text_icon_padding = 0

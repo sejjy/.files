@@ -2,11 +2,14 @@
 
 ## 🍚 hyprrice
 
+| ![workflow](assets/workflow-0.png) |
+| :--------------------------------: |
+
+| ![workflow](assets/workflow-1.png) |
+| :--------------------------------: |
+
 | ![desktop](assets/desktop.png) |
 | :----------------------------: |
-
-| ![workflow](assets/workflow.png) |
-| :------------------------------: |
 
 | ![hyprlock](assets/hyprlock.png) |
 | :------------------------------: |
@@ -20,6 +23,7 @@
 [rofi](https://github.com/sejjy/rofi) ·
 [tmux](https://github.com/sejjy/tmux) ·
 [waybar](https://github.com/sejjy/mechabar) ·
+[yazi](https://github.com/sejjy/yazi) ·
 [zen](https://github.com/sejjy/zenplified)
 
 </div>
