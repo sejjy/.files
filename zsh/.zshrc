@@ -52,8 +52,12 @@ bindkey '^ ' autosuggest-accept
 #	Aliases
 #-------------#
 
+# shell
+alias reload='exec zsh'
+alias e='y' # yazi
+alias z='cd' # zoxide
+
 # file
-alias e='y'
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
@@ -92,10 +96,11 @@ alias ga='git add'
 alias gc='git commit'
 alias gcm='git commit -m'
 alias grh='git reset --hard HEAD'
-alias gcf='git clean -d --force'
+alias gcd='git clean -d --force'
 alias gr='git restore'
 alias gb='git branch'
 alias gco='git checkout'
+alias gcp='git cherry-pick'
 alias gp='git push'
 alias gpl='git pull'
 alias gs='git status'
@@ -103,7 +108,7 @@ alias gl='git log --decorate --graph --oneline'
 alias gd='git diff | bat'
 alias gdh='git diff HEAD | bat'
 
-# nvim
+# vim
 alias v='vim'
 alias n='nvim'
 alias nn="cd $HOME/.config/nvim && nvim"
@@ -128,13 +133,14 @@ alias tls='tmux list-sessions'
 alias tk='tmux kill-session'
 alias tks='tmux kill-server'
 
-# misc
-alias np="playerctl metadata -af '{{ title }} - {{ artist }}'"
-alias ytd="$HOME/.config/hypr/scripts/ytdlp.sh"
+# scripts
 alias clean="$HOME/.config/hypr/scripts/cleanup.sh"
 alias server="$HOME/.config/hypr/scripts/server.sh"
+alias ytd="$HOME/.config/hypr/scripts/ytdlp.sh"
+
+# misc
 alias discord='discord --ozone-platform-hint=auto'
-alias reload='exec zsh'
+alias np="playerctl metadata -af '{{ title }} - {{ artist }}'"
 
 #-------------#
 #	Exports
@@ -176,7 +182,7 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # Smarter cd
 # https://github.com/ajeetdsouza/zoxide
-eval "$(zoxide init zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 
 #---------------#
 #	Functions
@@ -218,7 +224,9 @@ function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 
 	yazi "$@" --cwd-file="$tmp"
+
 	IFS= read -r -d '' cwd < "$tmp"
 	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+
 	rm -f -- "$tmp"
 }
