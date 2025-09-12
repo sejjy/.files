@@ -17,8 +17,9 @@ filename=$(find_next)
 
 format=$1
 case $format in
-	'screen') grimblast copysave screen "$DIRNAME/$filename" ;;
+	'active') grimblast copysave active "$DIRNAME/$filename" ;;
 	'area') grimblast --freeze copysave area "$DIRNAME/$filename" ;;
+	'screen') grimblast copysave screen "$DIRNAME/$filename" ;;
 esac
 
 if [[ -s "$DIRNAME/$filename" ]]; then

@@ -32,40 +32,40 @@ return {
 			end, hdesc("previous change"))
 
 			-- actions
-			vim.keymap.set("n", "<Leader>hs", gitsigns.stage_hunk, hdesc("[s]tage"))
-			vim.keymap.set("n", "<Leader>hr", gitsigns.reset_hunk, hdesc("[r]eset"))
+			vim.keymap.set("n", "<Leader>gs", gitsigns.stage_hunk, hdesc("[s]tage"))
+			vim.keymap.set("n", "<Leader>gr", gitsigns.reset_hunk, hdesc("[r]eset"))
 
-			vim.keymap.set("v", "<Leader>hs", function()
+			vim.keymap.set("v", "<Leader>gs", function()
 				gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
 			end, hdesc("[s]tage selection"))
 
-			vim.keymap.set("v", "<Leader>hr", function()
+			vim.keymap.set("v", "<Leader>gr", function()
 				gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
 			end, hdesc("[r]eset selection"))
 
-			vim.keymap.set("n", "<Leader>hS", gitsigns.stage_buffer, hdesc("[S]tage buffer"))
-			vim.keymap.set("n", "<Leader>hR", gitsigns.reset_buffer, hdesc("[R]eset buffer"))
-			vim.keymap.set("n", "<Leader>hp", gitsigns.preview_hunk, hdesc("[p]review"))
-			vim.keymap.set("n", "<Leader>hi", gitsigns.preview_hunk_inline, hdesc("[i]nline preview"))
+			vim.keymap.set("n", "<Leader>gS", gitsigns.stage_buffer, hdesc("[S]tage buffer"))
+			vim.keymap.set("n", "<Leader>gR", gitsigns.reset_buffer, hdesc("[R]eset buffer"))
+			vim.keymap.set("n", "<Leader>gp", gitsigns.preview_hunk, hdesc("[p]review"))
+			vim.keymap.set("n", "<Leader>gi", gitsigns.preview_hunk_inline, hdesc("[i]nline preview"))
 
-			vim.keymap.set("n", "<Leader>hb", function()
+			vim.keymap.set("n", "<Leader>gb", function()
 				gitsigns.blame_line({ full = true })
 			end, hdesc("[b]lame FULL"))
 
-			vim.keymap.set("n", "<Leader>hd", gitsigns.diffthis, hdesc("[d]iff"))
-			vim.keymap.set("n", "<Leader>hD", function()
+			vim.keymap.set("n", "<Leader>gd", gitsigns.diffthis, hdesc("[d]iff"))
+			vim.keymap.set("n", "<Leader>gD", function()
 				gitsigns.diffthis("~")
 			end, hdesc("[D]iff against ~"))
 
-			vim.keymap.set("n", "<Leader>hQ", function()
+			vim.keymap.set("n", "<Leader>gQ", function()
 				gitsigns.setqflist("all")
 			end, hdesc("[Q]uickfix ALL hunks"))
 
-			vim.keymap.set("n", "<Leader>hq", gitsigns.setqflist, hdesc("[q]uickfix hunks"))
+			vim.keymap.set("n", "<Leader>gq", gitsigns.setqflist, hdesc("[q]uickfix hunks"))
 
 			-- toggles
 			vim.keymap.set("n", "<Leader>tb", gitsigns.toggle_current_line_blame, tdesc("current line [b]lame"))
-			vim.keymap.set("n", "<Leader>td", gitsigns.toggle_deleted, tdesc("[d]eleted lines"))
+			vim.keymap.set("n", "<Leader>tl", gitsigns.toggle_deleted, tdesc("deleted [l]ines"))
 			vim.keymap.set("n", "<Leader>tw", gitsigns.toggle_word_diff, tdesc("[w]ord diff"))
 
 			-- text object

@@ -82,6 +82,7 @@ overwrite_offset = [ 0, 0, 51, 14 ]
 
 # quit
 quit_title  = "─ Quit? ─"
+quit_body   = "The following tasks are still running,\nare you sure you want to quit?"
 quit_offset = [ 0, 0, 51, 14 ]
 
 # : }}}

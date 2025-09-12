@@ -3,16 +3,6 @@ return {
 
 	event = "VeryLazy",
 
-	spec = {
-		{ "<Leader>c", group = "[c]ode" },
-		{ "<Leader>d", group = "[d]ocument" },
-		{ "<Leader>r", group = "[r]ename" },
-		{ "<Leader>s", group = "[s]earch" },
-		{ "<Leader>t", group = "[t]oggle" },
-		{ "<Leader>w", group = "[w]orkspace" },
-		{ "<Leader>h", group = "[h]unk" },
-	},
-
 	opts = {
 		delay = 0,
 

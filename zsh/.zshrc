@@ -1,8 +1,8 @@
 # Enable powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "$HOME/.cache/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-	source "$HOME/.cache/p10k-instant-prompt-${(%):-%n}.zsh"
+if [[ -r "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+	source "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 #-------------#
@@ -23,7 +23,7 @@ setopt CORRECT
 #	Parameters
 #----------------#
 
-HISTFILE="$HOME/.zsh_history"
+HISTFILE="$ZDOTDIR/.zsh_history"
 HISTSIZE=5000
 SAVEHIST=5000
 ZLE_RPROMPT_INDENT=0
@@ -56,6 +56,7 @@ bindkey '^ ' autosuggest-accept
 alias reload='exec zsh'
 alias e='y' # yazi
 alias z='cd' # zoxide
+alias :q='exit'
 
 # file
 alias cp='cp -i'
@@ -111,9 +112,9 @@ alias gdh='git diff HEAD | bat'
 # vim
 alias v='vim'
 alias n='nvim'
-alias nn="cd $HOME/.config/nvim && nvim"
-alias nh="cd $HOME/.config/hypr && nvim"
-alias nw="cd $HOME/.config/waybar && nvim"
+alias nn="cd $XDG_CONFIG_HOME/nvim && nvim"
+alias nh="cd $XDG_CONFIG_HOME/hypr && nvim"
+alias nw="cd $XDG_CONFIG_HOME/waybar && nvim"
 
 # docker
 alias dr='docker run'
@@ -134,9 +135,9 @@ alias tk='tmux kill-session'
 alias tks='tmux kill-server'
 
 # scripts
-alias clean="$HOME/.config/hypr/scripts/cleanup.sh"
-alias server="$HOME/.config/hypr/scripts/server.sh"
-alias ytd="$HOME/.config/hypr/scripts/ytdlp.sh"
+alias clean="$XDG_CONFIG_HOME/hypr/scripts/cleanup.sh"
+alias server="$XDG_CONFIG_HOME/hypr/scripts/server.sh"
+alias ytd="$XDG_CONFIG_HOME/hypr/scripts/ytdlp.sh"
 
 # misc
 alias discord='discord --ozone-platform-hint=auto'
@@ -173,8 +174,20 @@ ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 # https://github.com/romkatv/powerlevel10k
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f "$HOME/.p10k.zsh" ]] || source "$HOME/.p10k.zsh"
+# To customize prompt, run `p10k configure` or edit "$ZDOTDIR/.p10k.zsh".
+[[ ! -f "$ZDOTDIR/.p10k.zsh" ]] || source "$ZDOTDIR/.p10k.zsh"
+
+# Prompt overrides
+typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION=''
+typeset -g POWERLEVEL9K_LOCK_ICON=''
+typeset -g POWERLEVEL9K_HOME_ICON=''
+typeset -g POWERLEVEL9K_HOME_SUB_ICON=''
+typeset -g POWERLEVEL9K_FOLDER_ICON=''
+typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_last
+typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_EXPANSION=''
+typeset -g POWERLEVEL9K_VCS_BRANCH_ICON=$'󰘬 '
+typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIINS_CONTENT_EXPANSION='>'
+typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 
 #----------------#
 #	Extensions
@@ -190,7 +203,7 @@ eval "$(zoxide init --cmd cd zsh)"
 
 # pacman -F "command not found" handler
 # https://wiki.archlinux.org/title/Zsh
-function command_not_found_handler {
+function command_not_found_handler() {
 	printf 'zsh: Command not found: %s\n' "$1"
 
 	local entries=(${(f)"$(/usr/bin/pacman -F --machinereadable -- "/usr/bin/$1")"})
@@ -226,7 +239,7 @@ function y() {
 	yazi "$@" --cwd-file="$tmp"
 
 	IFS= read -r -d '' cwd < "$tmp"
-	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	[[ -n "$cwd" ]] && [[ "$cwd" != "$PWD" ]] && builtin cd -- "$cwd"
 
 	rm -f -- "$tmp"
 }

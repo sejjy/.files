@@ -102,13 +102,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gr", picker.lsp_references, gdesc("[r]eferences"))
 		vim.keymap.set("n", "gI", picker.lsp_implementations, gdesc("[I]mplementation"))
 
-		vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename, ldesc("re[n]ame"))
-		vim.keymap.set("n", "<Leader>D", picker.lsp_type_definitions, ldesc("type [D]efinition"))
-		vim.keymap.set("n", "<Leader>ds", picker.lsp_symbols, ldesc("document [s]ymbols"))
-		vim.keymap.set("n", "<Leader>ws", picker.lsp_workspace_symbols, ldesc("workspace [s]ymbols"))
+		vim.keymap.set("n", "<Leader>lr", vim.lsp.buf.rename, ldesc("[r]ename"))
+		vim.keymap.set("n", "<Leader>lD", picker.lsp_type_definitions, ldesc("type [D]efinition"))
+		vim.keymap.set("n", "<Leader>ld", picker.lsp_symbols, ldesc("[d]ocument symbols"))
+		vim.keymap.set("n", "<Leader>lw", picker.lsp_workspace_symbols, ldesc("[w]orkspace symbols"))
 
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, { silent = true })
-		vim.keymap.set({ "n", "x" }, "<Leader>ca", vim.lsp.buf.code_action, ldesc("code [a]ctions"))
+		vim.keymap.set({ "n", "x" }, "<Leader>la", vim.lsp.buf.code_action, ldesc("code [a]ctions"))
 
 		vim.keymap.set("n", "<Leader>th", function()
 			local lsp_hint = { bufnr = bufnum }
