@@ -27,6 +27,6 @@ return {
 
 		require("virt-column").setup({ char = "│" })
 
-		vim.keymap.set("n", "<leader>cc", toggle_colorcolumn, { desc = "color [c]olumn" })
+		vim.keymap.set("n", "<leader>tc", toggle_colorcolumn, { desc = "toggle color [c]olumn" })
 	end,
 }
