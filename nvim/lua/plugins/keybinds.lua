@@ -11,10 +11,14 @@ return {
 			border = "single",
 		},
 
+		layout = {
+			width = { min = 20, max = 40 },
+		},
+
 		icons = {
 			breadcrumb = "+",
 			separator = "󰁔",
-			ellipsis = "",
+			ellipsis = "…",
 			mappings = false,
 
 			keys = {
@@ -22,16 +26,16 @@ return {
 				Down = "󰁅",
 				Left = "󰁍",
 				Right = "󰁔",
-				C = "Ctrl-",
-				M = "Alt-",
-				D = "Super-",
-				S = "Shift-",
+				C = "C-",
+				M = "A-",
+				D = "D-",
+				S = "S-",
 				CR = "<Enter>",
-				Esc = "󱊷",
+				Esc = "<Esc>",
 				ScrollWheelDown = "󱕐",
 				ScrollWheelUp = "󱕑",
-				NL = "󰌑",
-				BS = "󰭜",
+				NL = "<NL>",
+				BS = "<BS>",
 				Space = "<Leader>",
 				Tab = "<Tab>",
 			},

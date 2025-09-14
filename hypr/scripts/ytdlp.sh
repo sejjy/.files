@@ -16,9 +16,9 @@ if ! command -v yt-dlp &>/dev/null; then
 	exit 1
 fi
 
-if [[ $url == '-h' || $url == '--help' || -z $url ]]; then
+if [[ -z $url ]]; then
 	echo -e "${red}Usage: ${blue}ytd ${green}<URL> <format> <dirname> <filename>${reset}"
-	echo -e "Use '_' to skip optional arguments."
+	echo "Use '_' to skip optional arguments."
 	exit 1
 fi
 

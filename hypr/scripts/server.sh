@@ -13,7 +13,7 @@ while true; do
 	read -r -p "Select an option: "
 
 	case $REPLY in
-		1)
+		1 | [Ss]tart)
 			# apache (httpd.service)
 			sudo mkdir -p /run/httpd
 			sudo chown http:http /run/httpd
@@ -34,7 +34,7 @@ while true; do
 				cat | head -n 3
 			exit
 			;;
-		2)
+		2 | [Ss]top)
 			# stop services
 			sudo systemctl stop httpd.service
 			sudo systemctl stop mariadb.service
@@ -46,15 +46,12 @@ while true; do
 				cat | head -n 3
 			exit
 			;;
-
-		3)
+		3 | [Ss]tatus)
 			# check status
 			sudo systemctl status httpd.service
 			sudo systemctl status mariadb.service
 			exit
 			;;
-		*)
-			echo -e "${red}Invalid option${reset}\n"
-			;;
+		*) echo -e "${red}Invalid option${reset}\n" ;;
 	esac
 done

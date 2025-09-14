@@ -3,7 +3,7 @@ return {
 
 	version = "v1.11.0",
 
-	priority = 1000,
+	name = "catppuccin",
 
 	config = function()
 		require("catppuccin").setup({

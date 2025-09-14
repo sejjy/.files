@@ -5,7 +5,7 @@ MAXLEN=40
 status=$(playerctl metadata --format "{{ status }}" 2>/dev/null)
 case $status in
 	'Playing') icon="󰐊" ;;
-	*) icon="󰏤" ;;
+	'Paused') icon="󰏤" ;;
 esac
 
 title=$(playerctl metadata --format "{{ title }}" 2>/dev/null)

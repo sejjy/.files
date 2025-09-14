@@ -10,7 +10,7 @@ return {
 
 			icons = {
 				undo = { saved = "" },
-				ui = { selected = "", unselected = "" },
+				ui = { selected = " ", unselected = " " },
 			},
 
 			layout = {
@@ -34,7 +34,9 @@ return {
 			sources = {
 				buffers = { current = false },
 				files = { hidden = true },
+				grep = { hidden = true },
 				grep_word = {
+					hidden = true,
 					search = function(prompt)
 						return " " .. prompt:word()
 					end,

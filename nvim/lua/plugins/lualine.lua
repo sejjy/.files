@@ -31,36 +31,29 @@ return {
 						"branch",
 						icon = "󰘬",
 						color = { fg = mocha.text },
-						padding = { left = 0, right = 1 },
+						padding = { right = 1 },
 						separator = { right = " " },
 					},
 				},
 
 				lualine_c = {
 					{
-						"diff",
-						symbols = { added = "󰐗 ", removed = "󰍶 ", modified = "󰻂 " },
-						diff_color = { modified = { fg = mocha.blue } },
-						padding = { left = 0, right = 1 },
-						separator = " ",
-						fmt = trunc(0, 0, 120, true),
-					},
-					{
 						"filetype",
 						icon_only = true,
-						padding = { left = 0, right = 0 },
+						padding = 0,
 						separator = "",
 					},
 					{
 						"filename",
-						symbols = {
-							modified = "[+]",
-							readonly = "[-]",
-							unnamed = "[Unnamed]",
-							newfile = "[New]",
-						},
-						padding = { left = 0 },
+						padding = { right = 1 },
+						separator = ":",
 						fmt = trunc(50, 18, 0, false),
+					},
+					{
+						"diff",
+						symbols = { added = "󰐗 ", removed = "󰍶 ", modified = "󰻂 " },
+						diff_color = { modified = { fg = mocha.blue } },
+						fmt = trunc(0, 0, 120, true),
 					},
 				},
 
@@ -68,7 +61,7 @@ return {
 					{
 						"diagnostics",
 						symbols = { error = "󰅙 ", warn = "󰀦 ", info = "󰋼 ", hint = "󰋗 " },
-						separator = "",
+						separator = ":",
 						fmt = trunc(0, 0, 120, true),
 					},
 					{

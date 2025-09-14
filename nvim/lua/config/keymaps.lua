@@ -32,40 +32,35 @@ vim.keymap.set("v", "<A-j>", ":m '>+1<Enter>gv=gv")
 vim.keymap.set("n", "<Enter>", "o<Esc>")
 vim.keymap.set("n", "<S-Enter>", "O<Esc>")
 
+-- join without moving cursor
+vim.keymap.set({ "n", "v" }, "J", "mzJ`z")
+
 -- void register
 vim.keymap.set("n", "x", '"_x')
 vim.keymap.set("x", "<Leader>p", '"_dP', { desc = "[p]aste" })
 vim.keymap.set({ "n", "v" }, "<Leader>d", '"_d', { desc = "[d]elete" })
 
-vim.keymap.set({ "n", "v" }, "+", "<C-a>") -- increment
-vim.keymap.set({ "n", "v" }, "-", "<C-x>") -- decrement
-vim.keymap.set({ "n", "v" }, "J", "mzJ`z") -- join without moving cursor
+-- shell
+vim.keymap.set("n", "<Leader>rx", ":!chmod +x %<Enter>", { desc = "chmod +[x]" })
+vim.keymap.set("n", "<Leader>rf", ":!npm run format<Enter>", { desc = "npm run [f]ormat" })
 
+vim.keymap.set("n", "<Esc>", ":nohlsearch<Enter>", { silent = true })
+vim.keymap.set("n", "<Leader>ts", ":set spell!<Enter>", { desc = "toggle [s]pell check" })
+vim.keymap.set("n", "<Leader>rn", ":%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>", { desc = "re[n]ame" })
+
+-- indent buffer without changing view
 vim.keymap.set("n", "<Leader>=", function()
 	local view = vim.fn.winsaveview()
 	vim.cmd("normal! gg=G")
 	vim.fn.winrestview(view)
 end, { desc = "indent buffer" })
 
--- goto opening pair
+-- goto next opening pair
 vim.keymap.set({ "n", "x" }, ")", function()
 	vim.fn.search("['\"[({<]", "W")
 end)
 
--- goto closing pair
+-- goto previous closing pair
 vim.keymap.set({ "n", "x" }, "(", function()
 	vim.fn.search("[]'\")}>]", "bW")
 end)
-
-vim.keymap.set("n", "<Esc>", ":nohlsearch<Enter>", { silent = true })
-vim.keymap.set("n", "<Leader>ts", ":set spell!<CR>", { silent = true, desc = "toggle [s]pell check" })
-vim.keymap.set("n", "<Leader>rn", ":%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>", { desc = "re[n]ame" })
-
--- shell
-vim.keymap.set("n", "<Leader>rx", ":!chmod +x %<Enter>", { silent = true, desc = "chmod +[x]" })
-vim.keymap.set("n", "<Leader>rf", ":!npm run format<Enter>", { silent = true, desc = "npm run [f]ormat" })
-
--- shorten desc
-vim.keymap.set("n", "gx", function()
-	vim.cmd("normal! gx")
-end, { desc = "Opens filepath or URI under cursor" })

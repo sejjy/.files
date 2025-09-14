@@ -9,7 +9,7 @@ green='\033[1;32m'
 blue='\033[1;34m'
 reset='\033[0m'
 
-YAY_CACHE_DIR="$HOME/.cache/yay"
+DIR="$XDG_CACHE_HOME/yay"
 
 echo -e "\n${blue}Removing orphaned packages...${reset}"
 
@@ -28,8 +28,8 @@ sudo paccache -ruk0 2>/dev/null
 
 echo -e "\n${blue}Pruning old AUR package cache...${reset}"
 
-if [[ -d "$YAY_CACHE_DIR" ]]; then
-	paccache -rk2 --cachedir "$YAY_CACHE_DIR"
+if [[ -d "$DIR" ]]; then
+	paccache -rk2 --cachedir "$DIR"
 else
 	echo -e "\n${red}Yay cache directory not found.${reset}"
 fi

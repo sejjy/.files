@@ -254,7 +254,6 @@ gradient_color_7 = '#eba0ac'
 gradient_color_8 = '#f38ba8'
 
 
-
 [smoothing]
 
 # Percentage value for integral smoothing. Takes values from 0 - 100.
