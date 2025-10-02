@@ -41,7 +41,8 @@ vim.opt.updatetime = 250
 
 -- others
 vim.opt.wrap = false
-vim.opt.mouse = ""
+-- vim.opt.mouse = ""
+vim.opt.mousemodel = "extend"
 vim.opt.showmode = false
 vim.opt.undofile = true
 vim.opt.winborder = "single"

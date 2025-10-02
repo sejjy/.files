@@ -385,7 +385,7 @@ prepend_files = [
 	{ name = "makefile.am", text = "󱁤", fg = "#cba6f7" },
 	{ name = "maxima-init.mac", text = "󰫺", fg = "#6c7086" },
 	{ name = "meson_options.txt", text = "󰫺", fg = "#89b4fa" },
-	{ name = "package-lock.json", text = "󰏖", fg = "#f38ba8" },
+	{ name = "package-lock.json", text = "󰏗", fg = "#f38ba8" },
 	{ name = "package.json", text = "󰎙", fg = "#a6e3a1" },
 	{ name = "pudb.cfg", text = "󰯂", fg = "#74c7ec" },
 	{ name = "requirements.txt", text = "󱘎", fg = "#cba6f7" },

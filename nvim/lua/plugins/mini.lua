@@ -2,7 +2,7 @@ return {
 	{
 		"nvim-mini/mini.nvim",
 
-		version = "*",
+		version = false,
 
 		event = "VeryLazy",
 
@@ -50,7 +50,7 @@ return {
 					["docker-compose.yml"] = { glyph = "󰡨", hl = "MiniIconsBlue" },
 					["eslint.config.js"] = { glyph = "󰱺", hl = "MiniIconsPurple" },
 					["init.lua"] = { glyph = "󰢱", hl = "MiniIconsAzure" },
-					["package-lock.json"] = { glyph = "󰏖", hl = "MiniIconsRed" },
+					["package-lock.json"] = { glyph = "󰏗", hl = "MiniIconsRed" },
 					["package.json"] = { glyph = "󰎙", hl = "MiniIconsGreen" },
 					["tsconfig.json"] = { glyph = "󰛦", hl = "MiniIconsBlue" },
 					["vite.config.ts"] = { glyph = "", hl = "MiniIconsPurple" },
