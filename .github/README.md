@@ -1,6 +1,6 @@
 <div align="center">
 
-## 🍚 hyprrice
+## 🍚 .files
 
 | ![workflow](assets/workflow-0.png) |
 | :--------------------------------: |
