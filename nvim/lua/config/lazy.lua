@@ -12,6 +12,7 @@ require("lazy").setup({ import = "plugins" }, {
 	install = {
 		missing = true,
 		colorscheme = { "catppuccin-mocha" },
+		-- colorscheme = { "vague" },
 	},
 
 	checker = {
