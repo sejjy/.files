@@ -6,9 +6,6 @@
 # Created: August 11, 2025
 # License: MIT
 
-# shellcheck disable=SC1091
-source "$HOME/.config/waybar/scripts/theme-switcher.sh" fzf
-
 RED='\033[1;31m'
 RST='\033[0m'
 
@@ -24,48 +21,36 @@ ensure-enabled() {
 	fi
 }
 
-scan-for-networks() {
-	local i list
-
+get-network-list() {
 	nmcli device wifi rescan 2>/dev/null
 
+	local i
 	for ((i = 1; i <= TIMEOUT; i++)); do
-		echo -en "\rScanning for networks... ($i/$TIMEOUT)" >&2
-		echo -en '\033[s'
+		printf '\rScanning for networks... (%d/%d)' $i $TIMEOUT
+		printf '\033[1A' # move cursor up 1 line
 
 		list=$(timeout 1 nmcli device wifi list)
+		networks=$(tail -n +2 <<<"$list" | awk '$2 != "--"')
 
-		if [[ -n $list ]]; then
-			break
-		fi
+		[[ -n $networks ]] && break
 	done
 
-	echo -en "\n${RED}Scanning stopped.${RST}" >&2
-	echo -en '\033[u'
-	echo "$list"
-}
+	printf '\n%bScanning stopped.%b\n\n' "$RED" "$RST"
 
-get-network-list() {
-	local list=$1
-	local header
-
-	header=$(head -n 1 <<<"$list")
-	list=$(tail -n +2 <<<"$list" | awk '$2 != "--"')
-
-	if [[ -z $list ]]; then
+	if [[ -z $networks ]]; then
 		notify-send 'Wi-Fi' 'No networks found' -i 'package-broken'
 		return 1
 	fi
-
-	REPLY=("$header" "$list")
 }
 
 select-network() {
-	local header=${REPLY[0]}
-	local list=${REPLY[1]}
-	local opts=("${COLORS[@]}")
-	local bssid
+	# shellcheck disable=SC1090
+	. ~/.config/waybar/scripts/theme-switcher.sh 'fzf' # get fzf colors
 
+	local header
+	header=$(head -n 1 <<<"$list")
+
+	local opts=("${COLORS[@]}")
 	opts+=(
 		--border=sharp
 		--border-label=' Wi-Fi Networks '
@@ -78,7 +63,7 @@ select-network() {
 		--reverse
 	)
 
-	bssid=$(fzf "${opts[@]}" <<<"$list" | awk '{print $1}')
+	bssid=$(fzf "${opts[@]}" <<<"$networks" | awk '{print $1}')
 
 	if [[ -z $bssid ]]; then
 		return 1
@@ -86,15 +71,11 @@ select-network() {
 		notify-send 'Wi-Fi' 'Already connected to this network' \
 			-i 'package-install'
 		return 1
-	else
-		echo "$bssid"
 	fi
 }
 
 connect-to-network() {
-	local bssid=$1
-
-	echo -n 'Connecting...'
+	printf 'Connecting...\n'
 
 	if nmcli --ask device wifi connect "$bssid"; then
 		notify-send 'Wi-Fi' 'Successfully connected' -i 'package-install'
@@ -104,16 +85,14 @@ connect-to-network() {
 }
 
 main() {
-	local list bssid
-
 	ensure-enabled
-	list=$(scan-for-networks)
-	get-network-list "$list" || exit 1
 
-	printf '\n\n'
+	tput civis # make cursor invisible
+	get-network-list || exit 1
+	tput cnorm # make cursor visible
 
-	bssid=$(select-network) || exit 1
-	connect-to-network "$bssid"
+	select-network || exit 1
+	connect-to-network
 }
 
 main "$@"

@@ -37,7 +37,9 @@ return {
 		default_format_opts = { lsp_format = "fallback" },
 
 		formatters = {
-			shfmt = { prepend_args = { "--indent", "0" } },
+			shfmt = {
+				prepend_args = { "--indent", "0", "--case-indent" },
+			},
 		},
 	},
 

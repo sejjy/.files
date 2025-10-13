@@ -1,49 +1,17 @@
 return {
-	{
-		"catppuccin/nvim",
+	"catppuccin/nvim",
 
-		name = "catppuccin",
+	version = "v1.11.0",
 
-		config = function()
-			require("catppuccin").setup({
-				flavour = "mocha",
-				styles = { comments = {} },
-			})
+	name = "catppuccin",
 
-			vim.cmd.colorscheme("catppuccin")
-		end,
-	},
-	{
-		"vague-theme/vague.nvim",
+	config = function()
+		require("catppuccin").setup({
+			flavour = "mocha",
+			no_italic = true,
+			no_bold = true,
+		})
 
-		enabled = false,
-
-		lazy = false,
-
-		priority = 1000,
-
-		config = function()
-			require("vague").setup({
-				bold = false,
-				italic = false,
-			})
-			-- vim.cmd.colorscheme("vague")
-		end,
-	},
-	{
-		"projekt0n/github-nvim-theme",
-
-		enabled = false,
-
-		name = "github-theme",
-
-		lazy = false,
-
-		priority = 1000,
-
-		config = function()
-			require("github-theme").setup({})
-			-- vim.cmd.colorscheme("github_dark_default")
-		end,
-	},
+		vim.cmd.colorscheme("catppuccin")
+	end,
 }
