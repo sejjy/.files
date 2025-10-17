@@ -9,8 +9,10 @@
 VALUE=1
 
 print-usage() {
+	local scr=${0##*/}
+
 	cat <<-EOF
-		USAGE: ${0} [OPTIONS]
+		USAGE: $scr [OPTIONS]
 
 		Adjust brightness level using brightnessctl
 
@@ -21,10 +23,10 @@ print-usage() {
 
 		EXAMPLES:
 		    Increase brightness:
-		      $ ${0} up
+		      $ $scr up
 
 		    Decrease brightness by 5:
-		      $ ${0} down 5
+		      $ $scr down 5
 	EOF
 	exit 1
 }
@@ -32,8 +34,8 @@ print-usage() {
 set-brightness() {
 	local op
 	case $action in
-		up) op='+' ;;
-		down) op='-' ;;
+		'up') op='+' ;;
+		'down') op='-' ;;
 	esac
 
 	brightnessctl -n set "${value}%${op}" &>/dev/null
@@ -51,7 +53,7 @@ main() {
 	! ((value > 0)) && print-usage
 
 	case $action in
-		up | down) set-brightness ;;
+		'up' | 'down') set-brightness ;;
 		*) print-usage ;;
 	esac
 }

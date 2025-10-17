@@ -18,17 +18,14 @@
 export DBUS_SESSION_BUS_ADDRESS='unix:path=/run/user/1000/bus'
 
 get-level() {
-	local path level
-
+	local path
 	path=$(upower -e | grep BAT | head -n 1)
-	level=$(upower -i "$path" | awk '/percentage:/ {print $2}' | tr -d '%')
 
-	echo "$level"
+	level=$(upower -i "$path" | awk '/percentage:/ {print $2}' | tr -d '%')
 }
 
 get-icon() {
-	local level=$1
-	local icon='battery-'
+	icon='battery-'
 
 	if ((level == 100)); then
 		icon+='100'
@@ -37,20 +34,13 @@ get-icon() {
 		icon+=$(printf '%03d' "$level")
 	fi
 
-	echo "$icon"
+	[[ $state == 'Charging' ]] && icon+='-charging'
 }
 
 main() {
-	local state=${1^}
-	local level icon
-
-	level=$(get-level)
-	icon=$(get-icon "$level")
-
-	if [[ $state == 'Charging' ]]; then
-		icon+='-charging'
-	fi
-
+	state=${1^}
+	get-level
+	get-icon
 	notify-send "Battery $state (${level}%)" -i "$icon" -r 1525
 }
 

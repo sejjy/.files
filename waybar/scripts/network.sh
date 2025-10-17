@@ -44,11 +44,11 @@ get-network-list() {
 }
 
 select-network() {
-	# shellcheck disable=SC1090
-	. ~/.config/waybar/scripts/theme-switcher.sh 'fzf' # get fzf colors
-
 	local header
 	header=$(head -n 1 <<<"$list")
+
+	# shellcheck disable=SC1090
+	. ~/.config/waybar/scripts/theme-switcher.sh 'fzf' # get fzf colors
 
 	local opts=("${COLORS[@]}")
 	opts+=(
@@ -95,4 +95,4 @@ main() {
 	connect-to-network
 }
 
-main "$@"
+main

@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
-red='\033[1;31m'
-green='\033[1;32m'
-gray='\033[1;30m'
-reset='\033[0m'
+RED='\033[1;31m'
+GRN='\033[1;32m'
+GRY='\033[1;30m'
+RST='\033[0m'
 
-echo -e "\n1) ${green}${reset} Start"
-echo -e "2) ${red}${reset} Stop"
-echo -e "3) ${gray}${reset} Status\n"
+printf '\n1. %b%b Start' "$GRN" "$RST"
+printf '\n2. %b%b Stop' "$RED" "$RST"
+printf '\n3. %b%b Status\n\n' "$GRY" "$RST"
 
 while true; do
-	read -r -p "Select an option: "
+	read -r -p 'Select an option: '
 
 	case $REPLY in
 		1 | [Ss]tart)
@@ -52,6 +52,6 @@ while true; do
 			sudo systemctl status mariadb.service
 			exit
 			;;
-		*) echo -e "${red}Invalid option${reset}\n" ;;
+		*) printf '%bInvalid option.%b\n\n' "$RED" "$RST" ;;
 	esac
 done

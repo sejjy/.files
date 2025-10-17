@@ -1,24 +1,38 @@
 #!/usr/bin/env bash
 
-DIR="$HOME/Pictures/Screenshots"
+DIR=~/Pictures/Screenshots
 
-i=1
-while [[ -e "$DIR/Screenshot ($i).png" ]]; do
-	((i++))
-done
+get-filename() {
+	local i=1
+	while [[ -e "$DIR/Screenshot ($i).png" ]]; do
+		((i++))
+	done
 
-filename="Screenshot ($i).png"
+	name="Screenshot ($i).png"
+}
 
-format=$1
-case $format in
-	'screen') grimblast copysave screen "$DIR/$filename" ;;
-	'active') grimblast copysave active "$DIR/$filename" ;;
-	'area') grimblast --freeze copysave area "$DIR/$filename" ;;
-esac
+take-screenshot() {
+	local file="$DIR/$name"
 
-if [[ ! -s "$DIR/$filename" ]]; then
-	rm "$DIR/$filename"
-	exit 1
-fi
+	if [[ $target == area ]]; then
+		grimblast --freeze copysave "$target" "$file"
+	else
+		grimblast copysave "$target" "$file"
+	fi
 
-notify-send -i "$DIR/$filename" "$filename saved in $DIR"
+	if [[ -s $file ]]; then
+		notify-send "$name saved in $DIR" -i "$file"
+	else
+		rm "$file"
+		return 1
+	fi
+}
+
+main() {
+	target=$1
+
+	get-filename
+	take-screenshot || exit 1
+}
+
+main "$@"

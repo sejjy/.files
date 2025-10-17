@@ -2,20 +2,39 @@
 
 MAXLEN=40
 
-status=$(playerctl metadata --format "{{ status }}" 2>/dev/null)
-case $status in
-	'Playing') icon="󰐊" ;;
-	'Paused') icon="󰏤" ;;
-esac
+get-icon() {
+	local status
+	status=$(playerctl metadata --format '{{ status }}' 2>/dev/null)
 
-title=$(playerctl metadata --format "{{ title }}" 2>/dev/null)
-artist=$(playerctl metadata --format "{{ artist }}" 2>/dev/null)
-output="${title} — ${artist}"
+	case $status in
+		Playing) icon='󰐊' ;;
+		Paused) icon='󰏤' ;;
+	esac
+}
 
-outlen=${#output}
-if ((outlen > MAXLEN)); then
-	output="${output:0:$((MAXLEN - 1))}…"
-fi
+display-output() {
+	local title
+	title=$(playerctl metadata --format '{{ title }}' 2>/dev/null)
 
-output=$(playerctl metadata --format "$icon $output" 2>/dev/null)
-echo "$output"
+	local artist
+	artist=$(playerctl metadata --format '{{ artist }}' 2>/dev/null)
+
+	local track="${title} — ${artist}"
+	local trlen=${#track}
+
+	if ((trlen > MAXLEN)); then
+		track="${track:0:$((MAXLEN - 1))}…"
+	fi
+
+	local output
+	output=$(playerctl metadata --format "$icon $track" 2>/dev/null)
+
+	echo "$output"
+}
+
+main() {
+	get-icon
+	display-output
+}
+
+main

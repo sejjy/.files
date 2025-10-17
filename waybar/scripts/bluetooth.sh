@@ -49,11 +49,11 @@ get-device-list() {
 }
 
 select-device() {
-	# shellcheck disable=SC1090
-	. ~/.config/waybar/scripts/theme-switcher.sh 'fzf' # get fzf colors
-
 	local header
 	header=$(printf '%-17s %s' 'Address' 'Name')
+
+	# shellcheck disable=SC1090
+	. ~/.config/waybar/scripts/theme-switcher.sh 'fzf' # get fzf colors
 
 	local opts=("${COLORS[@]}")
 	opts+=(
@@ -116,4 +116,4 @@ main() {
 	pair-and-connect || exit 1
 }
 
-main "$@"
+main

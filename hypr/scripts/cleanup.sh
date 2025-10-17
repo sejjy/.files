@@ -1,37 +1,53 @@
 #!/usr/bin/env bash
+#
+# This script removes orphaned packages and clears package cache for both
+# pacman and yay. It keeps one (1) current and two (2) old versions of each
+# package.
+#
+# Author: Jesse Mirabel <github.com/sejjy>
+# Created: September 8, 2025
+# License: MIT
 
-# This script removes orphaned packages and
-# clears package cache for both pacman and yay.
-# It keeps one (1) current and two (2) old versions of each package.
+RED='\033[1;31m'
+GRN='\033[1;32m'
+BLU='\033[1;34m'
+RST='\033[0m'
 
-red='\033[1;31m'
-green='\033[1;32m'
-blue='\033[1;34m'
-reset='\033[0m'
+DIR=$XDG_CACHE_HOME/yay
 
-DIR="$XDG_CACHE_HOME/yay"
+remove-orphans() {
+	printf '\n%bRemoving orphaned packages...%b\n' "$BLU" "$RST"
 
-echo -e "\n${blue}Removing orphaned packages...${reset}"
+	orphaned=$(pacman -Qtdq)
 
-orphaned=$(pacman -Qtdq)
+	if [[ -n $orphaned ]]; then
+		sudo pacman -Rns "$orphaned"
+	else
+		echo 'No orphaned packages found.'
+	fi
+}
 
-if [[ -n "$orphaned" ]]; then
-	sudo pacman -Rns "$orphaned"
-else
-	echo 'No orphaned packages found.'
-fi
+clear-cache() {
+	printf '\n%bClearing package cache...%b\n' "$BLU" "$RST"
 
-echo -e "\n${blue}Clearing package cache...${reset}"
+	sudo paccache -rk2 2>/dev/null
+	sudo paccache -ruk0 2>/dev/null
 
-sudo paccache -rk2 2>/dev/null
-sudo paccache -ruk0 2>/dev/null
+	printf '\n%bPruning old AUR package cache...%b\n' "$BLU" "$RST"
 
-echo -e "\n${blue}Pruning old AUR package cache...${reset}"
+	if [[ -d $DIR ]]; then
+		paccache -rk2 --cachedir "$DIR"
+		yay -Sc
+	else
+		printf '\n%bYay cache directory not found.%b\n' "$RED" "$RST"
+	fi
+}
 
-if [[ -d "$DIR" ]]; then
-	paccache -rk2 --cachedir "$DIR"
-else
-	echo -e "\n${red}Yay cache directory not found.${reset}"
-fi
+main() {
+	remove-orphans
+	clear-cache
 
-echo -e "\n${green}Cleanup complete!${reset}"
+	printf '\n%bCleanup complete!%b\n' "$GRN" "$RST"
+}
+
+main
