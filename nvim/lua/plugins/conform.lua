@@ -5,7 +5,7 @@ return {
 
 	keys = {
 		{
-			"<leader>f",
+			"<Leader>f",
 			-- Leave visual mode after range format
 			function()
 				require("conform").format({ async = true }, function(err)

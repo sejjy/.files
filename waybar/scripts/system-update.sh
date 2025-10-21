@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 #
-# Update system packages using pacman and AUR helper
+# Checks for pending updates using checkupdates and upgrades packages using
+# pacman and an AUR helper if available.
+#
+# Dependencies:
+#  - checkupdates (from pacman-contrib)
+#  - An AUR helper (optional)
 #
 # Author: Jesse Mirabel <github.com/sejjy>
 # Created: August 16, 2025
@@ -11,40 +16,31 @@ BLU='\033[1;34m'
 RST='\033[0m'
 
 TIMEOUT=5
-HELPER=$(command -v yay trizen pikaur paru pakku pacaur aurman aura |
-	head -n 1 | xargs -- basename)
+HELPER=$(command -v yay trizen pikaur paru pakku pacaur aurman aura | head -n 1)
+HELPER=${HELPER##*/}
 
 check-updates() {
 	repo=0
-	repo=$(timeout $TIMEOUT pacman -Quq | wc -l)
+	repo=$(timeout $TIMEOUT checkupdates 2>/dev/null | wc -l)
 
+	# This might remain 0 until update-packages is run.
 	aur=0
 	if [[ -n $HELPER ]]; then
 		aur=$(timeout $TIMEOUT "$HELPER" -Quaq 2>/dev/null | wc -l)
 	fi
-
-	total=$((repo + aur))
 }
 
 update-packages() {
-	if ((total == 0)); then
-		notify-send 'No updates available' -i 'package-installed-updated'
-	else
-		if ((repo > 0)); then
-			printf '\n%bUpdating pacman packages...%b\n' "$BLU" "$RST"
-			sudo pacman -Syu
-		fi
+	printf '\n%bUpdating pacman packages...%b\n' "$BLU" "$RST"
+	sudo pacman -Syu
 
-		if ((aur > 0)); then
-			printf '\n%bUpdating AUR packages...%b\n' "$BLU" "$RST"
-			"$HELPER" -Syu
-		fi
+	printf '\n%bUpdating AUR packages...%b\n' "$BLU" "$RST"
+	"$HELPER" -Syu
 
-		notify-send 'Update Complete' -i 'package-install'
+	notify-send 'Update Complete' -i 'package-install'
 
-		printf '\n%bUpdate Complete!%b\n' "$GRN" "$RST"
-		read -rs -n 1 -p 'Press any key to exit...'
-	fi
+	printf '\n%bUpdate Complete!%b\n' "$GRN" "$RST"
+	read -rs -n 1 -p 'Press any key to exit...'
 }
 
 display-tooltip() {
@@ -53,6 +49,8 @@ display-tooltip() {
 	if [[ -n $HELPER ]]; then
 		tooltip+="\nAUR($HELPER): $aur"
 	fi
+
+	local total=$((repo + aur))
 
 	if ((total == 0)); then
 		echo "{ \"text\": \"󰸟\", \"tooltip\": \"No updates available\" }"

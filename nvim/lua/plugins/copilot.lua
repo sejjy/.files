@@ -1,6 +1,12 @@
 return {
 	"zbirenbaum/copilot.lua",
 
+	cmd = "Copilot",
+
+	keys = {
+		{ "<Leader>ta", ":Copilot toggle<Enter>", desc = "toggle Copilot [a]uto trigger" },
+	},
+
 	event = "InsertEnter",
 
 	config = function()
@@ -9,7 +15,7 @@ return {
 
 			suggestion = {
 				enabled = true,
-				-- auto_trigger = true,
+				auto_trigger = true,
 				debounce = 50, -- faster suggestions
 
 				keymap = {

@@ -41,8 +41,12 @@ vim.keymap.set("x", "<Leader>p", '"_dP', { desc = "[p]aste" })
 vim.keymap.set({ "n", "v" }, "<Leader>d", '"_d', { desc = "[d]elete" })
 
 -- shell
-vim.keymap.set("n", "<Leader>rx", ":!chmod +x %<Enter>", { desc = "chmod +[x]" })
-vim.keymap.set("n", "<Leader>rf", ":!npm run format<Enter>", { desc = "npm run [f]ormat" })
+vim.keymap.set("n", "<Leader>cx", ":!chmod +x %<Enter>", { desc = "chmod +[x]" })
+vim.keymap.set("n", "<Leader>nf", ":!npm run format<Enter>", { desc = "npm run [f]ormat" })
+
+vim.keymap.set("n", "<Leader>np", function()
+	vim.cmd("!npx prettier --write " .. vim.fn.expand("%"))
+end, { desc = "npx [p]rettier --write" })
 
 vim.keymap.set("n", "<Esc>", ":nohlsearch<Enter>", { silent = true })
 vim.keymap.set("n", "<Leader>ts", ":set spell!<Enter>", { desc = "toggle [s]pell check" })

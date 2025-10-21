@@ -1,16 +1,15 @@
 /*
-  zenplified - An ultra-minimal Zen Browser UI configuration
-  Author: https://github.com/sejjy
+	zenplified: Zen Browser, simplified.
+	Author: https://github.com/sejjy
 
-  Created: December 06, 2024
-  Version: Mozilla Zen 1.0.1-a.22
+	Created: December 06, 2024
+	Version: Mozilla Zen 1.0.1-a.22
 
-  Updated: July 14, 2025
-  Version: Mozilla Zen 1.14.4b
+	Updated: July 14, 2025
+	Version: Mozilla Zen 1.14.4b
 */
 
-/* ────────────────────────────────────────────────────────────────── page ────
-*/
+/* ──────────────────────────────────────────────────────────────── Page ──── */
 
 @-moz-document url-prefix("chrome:"),
 url("about:blank"),
@@ -18,29 +17,29 @@ url("about:home"),
 url("about:newtab"),
 url("about:privatebrowsing") {
 
-  /* dark theme */
-  @media (prefers-color-scheme: dark) {
-    body {
-      background-color: #0d0c0c !important;
-    }
-  }
+	/* Dark theme */
+	@media (prefers-color-scheme: dark) {
+		body {
+			background-color: #0d0c0c !important;
+		}
+	}
 
-  /* light theme */
-  @media (prefers-color-scheme: light) {
-    body {
-      background-color: #ffffff !important;
-    }
-  }
+	/* Light theme */
+	@media (prefers-color-scheme: light) {
+		body {
+			background-color: #ffffff !important;
+		}
+	}
 
-  /* hide search bar and personalize button */
-  .search-inner-wrapper,
-  .personalizeButtonWrapper {
-    display: none !important;
-  }
+	/* Hide search bar and personalize button */
+	.search-inner-wrapper,
+	.personalizeButtonWrapper {
+		display: none !important;
+	}
 
-  /* center logo and wordmark */
-  .logo-and-wordmark {
-    margin-bottom: 0 !important;
-    height: 50vh;
-  }
+	/* Center logo and wordmark */
+	.logo-and-wordmark {
+		margin-bottom: 0 !important;
+		height: 50vh;
+	}
 }

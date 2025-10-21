@@ -37,7 +37,7 @@ clear-cache() {
 
 	if [[ -d $DIR ]]; then
 		paccache -rk2 --cachedir "$DIR"
-		yay -Sc
+		yay -Sc --noconfirm
 	else
 		printf '\n%bYay cache directory not found.%b\n' "$RED" "$RST"
 	fi
