@@ -1,45 +1,25 @@
 /*
-	zenplified: Zen Browser, simplified.
-	Author: https://github.com/sejjy
+	zenplified - Zen Browser, simplified.
 
-	Created: December 06, 2024
-	Version: Mozilla Zen 1.0.1-a.22
-
-	Updated: July 14, 2025
-	Version: Mozilla Zen 1.14.4b
+	Author: Jesse Mirabel <sejjymvm@gmail.com>
+	Updated: October 27, 2025
+	Version: 1.17.2b
+	License: MIT
 */
 
-/* ──────────────────────────────────────────────────────────────── Page ──── */
-
 @-moz-document url-prefix("chrome:"),
-url("about:blank"),
-url("about:home"),
-url("about:newtab"),
-url("about:privatebrowsing") {
-
-	/* Dark theme */
-	@media (prefers-color-scheme: dark) {
-		body {
-			background-color: #0d0c0c !important;
-		}
-	}
-
-	/* Light theme */
-	@media (prefers-color-scheme: light) {
-		body {
-			background-color: #ffffff !important;
-		}
-	}
-
-	/* Hide search bar and personalize button */
-	.search-inner-wrapper,
-	.personalizeButtonWrapper {
+               url("about:blank"),
+               url("about:home"),
+               url("about:newtab"),
+               url("about:privatebrowsing")
+{
+	.info-border,
+	.personalizeButtonWrapper,
+	.search-inner-wrapper {
 		display: none !important;
 	}
 
-	/* Center logo and wordmark */
 	.logo-and-wordmark {
-		margin-bottom: 0 !important;
 		height: 50vh;
 	}
 }
