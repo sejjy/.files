@@ -71,5 +71,10 @@ return {
 		cmdline = {
 			completion = { menu = { auto_show = true } },
 		},
+
+		keymap = {
+			["<A-f>"] = { "snippet_forward", "fallback" },
+			["<A-b>"] = { "snippet_backward", "fallback" },
+		},
 	},
 }
