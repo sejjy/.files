@@ -5,23 +5,23 @@
 		 - https://github.com/Alexays/Waybar/issues/4354
 		 - https://github.com/sejjy/mechabar/issues/31
 	------------------------------------------------------*/
-	/*------------------------------------------------------
-		"include": [
-			"~/.config/waybar/modules/*.jsonc",
-			"~/.config/waybar/modules/custom/*.jsonc",
-			"~/.config/waybar/modules/hyprland/*.jsonc"
+	/*
+	"include": [
+		"~/.config/waybar/modules/*.jsonc",
+		"~/.config/waybar/modules/custom/*.jsonc",
+		"~/.config/waybar/modules/hyprland/*.jsonc"
 
-			// modules that are not included by default:
-			// "~/.config/waybar/modules/extras/*.jsonc"
-		],
-	------------------------------------------------------*/
+		// modules that are not included by default:
+		// "~/.config/waybar/modules/extras/*.jsonc"
+	],
+	*/
 
 	/*------------
 		layout
 	------------*/
 
 	"modules-left": [
-		"group/theme_switcher",
+		"group/user",
 		"custom/left_div#1",
 		"hyprland/workspaces",
 		"custom/right_div#1",
@@ -88,33 +88,31 @@
 	// "id":
 	"reload_style_on_change": true,
 
-	/*-------------------------------------------------------------------
+	/*--------------------------------------------------------
 		HINT:
-		See the modules directory for more per-module config options.
-	-------------------------------------------------------------------*/
+		See the modules directory for more config options.
+	--------------------------------------------------------*/
+
 	/*------------------
 		modules-left
 	------------------*/
 
-	"group/theme_switcher": {
+	"group/user": {
 		"orientation": "horizontal",
 		"modules": [
-			"custom/theme_switcher",
+			"custom/trigger",
 			"custom/user"
 		],
 		"drawer": {}
 	},
-	"custom/theme_switcher": {
-		"exec": "~/.config/waybar/scripts/theme-switcher.sh",
-		"return-type": "json",
-		"format": "{}",
+	"custom/trigger": {
+		"format": "󰍜",
 		"min-length": 4,
 		"max-length": 4,
-		"on-click": "~/.config/waybar/scripts/theme-switcher.sh next",
-		"on-click-right": "~/.config/waybar/scripts/theme-switcher.sh prev"
+		"tooltip": false
 	},
 	"custom/user": {
-		"exec": "id --user --name",
+		"exec": "id -un",
 		"format": "{}",
 		"tooltip": false
 	},
@@ -281,13 +279,13 @@
 	},
 
 	"custom/system_update": {
-		"exec": "~/.config/waybar/scripts/system-update.sh",
+		"exec": "~/.config/waybar/scripts/system-update.sh module",
 		"return-type": "json",
 		"interval": 3600,
 		"format": "{}",
 		"min-length": 2,
 		"max-length": 2,
-		"on-click": "kitty -e ~/.config/waybar/scripts/system-update.sh start"
+		"on-click": "kitty -e ~/.config/waybar/scripts/system-update.sh"
 	},
 
 	/*-------------------

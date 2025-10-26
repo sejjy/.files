@@ -1,8 +1,8 @@
 {
-	"group/theme_switcher": {
+	"group/user": {
 		"orientation": "horizontal",
 		"modules": [
-			"custom/theme_switcher",
+			"custom/trigger",
 			"custom/user"
 		],
 		"drawer": {
@@ -13,27 +13,27 @@
 		}
 	},
 
-	"custom/theme_switcher": {
-		"exec": "~/.config/waybar/scripts/theme-switcher.sh",
+	"custom/trigger": {
+		// "exec":
 		// "exec-if":
 		// "exec-on-event":
 		// "hide-empty-text":
-		"return-type": "json",
+		// "return-type":
 		// "interval":
 		// "restart-interval":
 		// "signal":
-		"format": "{}",
+		"format": "󰍜",
 		// "format-icons":
 		// "rotate":
 		"min-length": 4,
 		"max-length": 4,
-		"on-click": "~/.config/waybar/scripts/theme-switcher.sh next",
+		// "on-click":
 		// "on-click-middle":
-		"on-click-right": "~/.config/waybar/scripts/theme-switcher.sh prev"
+		// "on-click-right":
 		// "on-scroll-up":
 		// "on-scroll-down":
 		// "smooth-scrolling-threshold":
-		// "tooltip":
+		"tooltip": false
 		// "tooltip-format":
 		// "escape":
 	},
@@ -43,7 +43,7 @@
 	--------------*/
 
 	"custom/user": {
-		"exec": "id --user --name",
+		"exec": "id -un",
 		// "exec-if":
 		// "exec-on-event":
 		// "hide-empty-text":

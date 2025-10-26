@@ -1,11 +1,14 @@
-/* theme switcher */
+/*--------------
+	username
+--------------*/
 
 #custom-user {
 	padding-right: 12px;
-	font-weight: normal;
 }
 
-/* workspaces */
+/*----------------
+	workspaces
+----------------*/
 
 #custom-left_div.1,
 #custom-right_div.1 {
@@ -15,16 +18,23 @@
 	padding: 0 1px;
 	background-color: @workspaces;
 }
-#workspaces .active label {
-	font-size: 23px;
+#workspaces button {
+	border-radius: 16px;
+	min-width: 16px;
+	padding: 0 10px;
+}
+#workspaces button:hover {
+	background-color: @hover-bg;
+	color: @hover-fg;
+}
+#workspaces button.active label {
 	color: @accent;
 }
 
-/* window title */
+/*------------------
+	window title
+------------------*/
 
 #window {
 	margin-left: 12px;
-}
-#window label {
-	font-weight: normal;
 }
