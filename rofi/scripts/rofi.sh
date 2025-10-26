@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 #
-# A script to launch various Rofi menus.
+# Display a Rofi menu based on the argument provided
 #
-# Dependencies:
-#  - rofi
-#  - rofi-calc
-#  - rofi-emoji
-#  - cliphist
-#  - wl-clipboard
+# Requirements:
+# 	- rofi
+# 	- rofi-calc
+# 	- rofi-emoji
+# 	- cliphist
+# 	- wl-clipboard
 #
-# Author: Jesse Mirabel <github.com/sejjy>
+# Author: Jesse Mirabel <sejjymvm@gmail.com>
 # Created: January 3, 2025
 # License: MIT
 

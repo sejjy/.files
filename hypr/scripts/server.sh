@@ -5,53 +5,51 @@ GRN='\033[1;32m'
 GRY='\033[1;30m'
 RST='\033[0m'
 
-printf '\n1. %b%b Start' "$GRN" "$RST"
-printf '\n2. %b%b Stop' "$RED" "$RST"
-printf '\n3. %b%b Status\n\n' "$GRY" "$RST"
+sys-control() {
+	local action=$1
+	sudo systemctl "$action" httpd.service
+	sudo systemctl "$action" mariadb.service
+}
 
-while true; do
-	read -r -p 'Select an option: '
+main() {
+	printf '\n1. %b%b Start' "$GRN" "$RST"
+	printf '\n2. %b%b Stop' "$RED" "$RST"
+	printf '\n3. %b%b Status\n\n' "$GRY" "$RST"
 
-	case $REPLY in
-		1 | [Ss]tart)
-			# apache (httpd.service)
-			sudo mkdir -p /run/httpd
-			sudo chown http:http /run/httpd
+	while true; do
+		read -r -p 'Select an option: '
 
-			# mariadb (mariadb.service)
-			sudo mkdir -p /run/mysqld
-			sudo chown mysql:mysql /run/mysqld
-			sudo chmod 755 /run/mysqld
+		case $REPLY in
+			1 | [Ss]tart)
+				# Apache (httpd.service)
+				sudo mkdir -p /run/httpd
+				sudo chown http:http /run/httpd
 
-			# start services
-			sudo systemctl restart httpd.service
-			sudo systemctl restart mariadb.service
+				# MariaDB (mariadb.service)
+				sudo mkdir -p /run/mysqld
+				sudo chown mysql:mysql /run/mysqld
+				sudo chmod 755 /run/mysqld
 
-			# display status
-			sudo SYSTEMD_COLORS=1 systemctl --no-pager status mariadb.service |
-				cat | head -n 3
-			sudo SYSTEMD_COLORS=1 systemctl --no-pager status httpd.service |
-				cat | head -n 3
-			exit
-			;;
-		2 | [Ss]top)
-			# stop services
-			sudo systemctl stop httpd.service
-			sudo systemctl stop mariadb.service
+				sys-control 'start'
+				sudo SYSTEMD_COLORS=1 systemctl --no-pager status \
+					httpd.service mariadb.service
+				break
+				;;
+			2 | [Ss]top)
+				sys-control 'stop'
+				sudo SYSTEMD_COLORS=1 systemctl --no-pager status \
+					httpd.service mariadb.service
+				break
+				;;
+			3 | [Ss]tatus)
+				sys-control 'status'
+				break
+				;;
+			*)
+				printf '%bInvalid option.%b\n\n' "$RED" "$RST"
+				;;
+		esac
+	done
+}
 
-			# display status
-			sudo SYSTEMD_COLORS=1 systemctl --no-pager status mariadb.service |
-				cat | head -n 3
-			sudo SYSTEMD_COLORS=1 systemctl --no-pager status httpd.service |
-				cat | head -n 3
-			exit
-			;;
-		3 | [Ss]tatus)
-			# check status
-			sudo systemctl status httpd.service
-			sudo systemctl status mariadb.service
-			exit
-			;;
-		*) printf '%bInvalid option.%b\n\n' "$RED" "$RST" ;;
-	esac
-done
+main

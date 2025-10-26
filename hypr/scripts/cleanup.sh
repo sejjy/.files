@@ -1,12 +1,4 @@
 #!/usr/bin/env bash
-#
-# This script removes orphaned packages and clears package cache for both
-# pacman and yay. It keeps one (1) current and two (2) old versions of each
-# package.
-#
-# Author: Jesse Mirabel <github.com/sejjy>
-# Created: September 8, 2025
-# License: MIT
 
 RED='\033[1;31m'
 GRN='\033[1;32m'

@@ -11,36 +11,29 @@
 # Reload udev rules by running:
 # sudo udevadm control --reload
 #
-# Author: Jesse Mirabel <github.com/sejjy>
+# Author: Jesse Mirabel <sejjymvm@gmail.com>
 # Created: August 15, 2025
 # License: MIT
 
 export DBUS_SESSION_BUS_ADDRESS='unix:path=/run/user/1000/bus'
 
-get-level() {
-	local path
+main() {
+	local path level
 	path=$(upower -e | grep BAT | head -n 1)
-
 	level=$(upower -i "$path" | awk '/percentage:/ {print $2}' | tr -d '%')
-}
 
-get-icon() {
-	icon='battery-'
-
+	local icon='battery-'
+	local icon_level
 	if ((level == 100)); then
 		icon+='100'
 	else
-		level=$(((level / 10) * 10))
-		icon+=$(printf '%03d' "$level")
+		icon_level=$(((level / 10) * 10))
+		icon+=$(printf '%03d' "$icon_level")
 	fi
 
+	local state=${1^}
 	[[ $state == 'Charging' ]] && icon+='-charging'
-}
 
-main() {
-	state=${1^}
-	get-level
-	get-icon
 	notify-send "Battery $state (${level}%)" -i "$icon" -r 1525
 }
 

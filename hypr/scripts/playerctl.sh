@@ -2,7 +2,7 @@
 
 MAXLEN=40
 
-get-icon() {
+main() {
 	local status
 	status=$(playerctl metadata --format '{{ status }}' 2>/dev/null)
 
@@ -10,9 +10,7 @@ get-icon() {
 		Playing) icon='󰐊' ;;
 		Paused) icon='󰏤' ;;
 	esac
-}
 
-display-output() {
 	local title
 	title=$(playerctl metadata --format '{{ title }}' 2>/dev/null)
 
@@ -21,7 +19,6 @@ display-output() {
 
 	local track="${title} — ${artist}"
 	local trlen=${#track}
-
 	if ((trlen > MAXLEN)); then
 		track="${track:0:$((MAXLEN - 1))}…"
 	fi
@@ -30,11 +27,6 @@ display-output() {
 	output=$(playerctl metadata --format "$icon $track" 2>/dev/null)
 
 	echo "$output"
-}
-
-main() {
-	get-icon
-	display-output
 }
 
 main
