@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 #
-# Connect to a Bluetooth device using bluetoothctl and fzf
+# Scan, select, pair, and connect to Bluetooth devices
 #
-# Author: Jesse Mirabel <github.com/sejjy>
+# Requirements:
+# 	- bluetoothctl (bluez-utils)
+# 	- fzf
+# 	- notify-send (libnotify)
+#
+# Author: Jesse Mirabel <sejjymvm@gmail.com>
 # Created: August 19, 2025
 # License: MIT
 
@@ -10,16 +15,6 @@ RED='\033[1;31m'
 RST='\033[0m'
 
 TIMEOUT=10
-
-ensure-on() {
-	local status
-	status=$(bluetoothctl show | grep PowerState | awk '{print $2}')
-
-	if [[ $status == 'off' ]]; then
-		bluetoothctl power on >/dev/null
-		notify-send 'Bluetooth On' -i 'network-bluetooth-activated' -r 1925
-	fi
-}
 
 get-device-list() {
 	bluetoothctl --timeout $TIMEOUT scan on >/dev/null &
@@ -53,10 +48,9 @@ select-device() {
 	header=$(printf '%-17s %s' 'Address' 'Name')
 
 	# shellcheck disable=SC1090
-	. ~/.config/waybar/scripts/theme-switcher.sh 'fzf' # get fzf colors
+	. ~/.config/waybar/scripts/fzf-colors.sh 2>/dev/null
 
-	local opts=("${COLORS[@]}")
-	opts+=(
+	local opts=(
 		--border=sharp
 		--border-label=' Bluetooth Devices '
 		--ghost='Search'
@@ -66,6 +60,7 @@ select-device() {
 		--info=inline-right
 		--pointer=
 		--reverse
+		"${COLORS[@]}"
 	)
 
 	address=$(fzf "${opts[@]}" <<<"$list" | awk '{print $1}')
@@ -106,7 +101,13 @@ pair-and-connect() {
 }
 
 main() {
-	ensure-on
+	local status
+	status=$(bluetoothctl show | grep PowerState | awk '{print $2}')
+
+	if [[ $status == 'off' ]]; then
+		bluetoothctl power on >/dev/null
+		notify-send 'Bluetooth On' -i 'network-bluetooth-activated' -r 1925
+	fi
 
 	tput civis # make cursor invisible
 	get-device-list || exit 1

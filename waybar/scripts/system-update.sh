@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 #
-# Checks for pending updates using checkupdates and upgrades packages using
-# pacman and an AUR helper if available.
+# Check for available updates and optionally upgrade packages on Arch Linux.
 #
-# Dependencies:
-#  - checkupdates (from pacman-contrib)
-#  - An AUR helper (optional)
+# Requirements:
+# 	- checkupdates (pacman-contrib)
+# 	- notify-send (libnotify)
+# 	- optional: an AUR helper (aura, paru, pikaur, trizen, yay)
 #
-# Author: Jesse Mirabel <github.com/sejjy>
+# Author: Jesse Mirabel <sejjymvm@gmail.com>
 # Created: August 16, 2025
 # License: MIT
 
@@ -16,17 +16,14 @@ BLU='\033[1;34m'
 RST='\033[0m'
 
 TIMEOUT=5
-HELPER=$(command -v yay trizen pikaur paru pakku pacaur aurman aura | head -n 1)
-HELPER=${HELPER##*/}
+REPO=0
+AUR=0
 
 check-updates() {
-	repo=0
-	repo=$(timeout $TIMEOUT checkupdates 2>/dev/null | wc -l)
+	REPO=$(timeout $TIMEOUT checkupdates 2>/dev/null | wc -l)
 
-	# This might remain 0 until update-packages is run.
-	aur=0
-	if [[ -n $HELPER ]]; then
-		aur=$(timeout $TIMEOUT "$HELPER" -Quaq 2>/dev/null | wc -l)
+	if [[ -n $helper ]]; then
+		AUR=$(timeout $TIMEOUT "$helper" -Quaq 2>/dev/null | wc -l)
 	fi
 }
 
@@ -35,7 +32,7 @@ update-packages() {
 	sudo pacman -Syu
 
 	printf '\n%bUpdating AUR packages...%b\n' "$BLU" "$RST"
-	"$HELPER" -Syu
+	"$helper" -Syu
 
 	notify-send 'Update Complete' -i 'package-install'
 
@@ -43,14 +40,14 @@ update-packages() {
 	read -rs -n 1 -p 'Press any key to exit...'
 }
 
-display-tooltip() {
-	local tooltip="Official: $repo"
+display-module() {
+	local tooltip="Official: $REPO"
 
-	if [[ -n $HELPER ]]; then
-		tooltip+="\nAUR($HELPER): $aur"
+	if [[ -n $helper ]]; then
+		tooltip+="\nAUR($helper): $AUR"
 	fi
 
-	local total=$((repo + aur))
+	local total=$((REPO + AUR))
 
 	if ((total == 0)); then
 		echo "{ \"text\": \"󰸟\", \"tooltip\": \"No updates available\" }"
@@ -60,16 +57,21 @@ display-tooltip() {
 }
 
 main() {
-	local action=$1
-	case $action in
-		'start')
+	local arg=$1
+	local helpers=(aura paru pikaur trizen yay)
+	local bin
+	bin=$(command -v "${helpers[@]}" | head -n 1)
+	helper=${bin##*/}
+
+	case $arg in
+		'module')
+			check-updates
+			display-module
+			;;
+		*)
 			printf '%bChecking for updates...%b' "$BLU" "$RST"
 			check-updates
 			update-packages
-			;;
-		*)
-			check-updates
-			display-tooltip
 			;;
 	esac
 }

@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 #
-# Connect to a Wi-Fi network using nmcli and fzf
+# Scan, select, and connect to Wi-Fi networks
 #
-# Author: Jesse Mirabel <github.com/sejjy>
+# Requirements:
+# 	- nmcli (networkmanager)
+# 	- fzf
+# 	- notify-send (libnotify)
+#
+# Author: Jesse Mirabel <sejjymvm@gmail.com>
 # Created: August 11, 2025
 # License: MIT
 
@@ -10,16 +15,6 @@ RED='\033[1;31m'
 RST='\033[0m'
 
 TIMEOUT=5
-
-ensure-enabled() {
-	local status
-	status=$(nmcli radio wifi)
-
-	if [[ $status == 'disabled' ]]; then
-		nmcli radio wifi on
-		notify-send 'Wi-Fi Enabled' -i 'network-wireless-on' -r 1125
-	fi
-}
 
 get-network-list() {
 	nmcli device wifi rescan 2>/dev/null
@@ -48,10 +43,9 @@ select-network() {
 	header=$(head -n 1 <<<"$list")
 
 	# shellcheck disable=SC1090
-	. ~/.config/waybar/scripts/theme-switcher.sh 'fzf' # get fzf colors
+	. ~/.config/waybar/scripts/fzf-colors.sh 2>/dev/null
 
-	local opts=("${COLORS[@]}")
-	opts+=(
+	local opts=(
 		--border=sharp
 		--border-label=' Wi-Fi Networks '
 		--ghost='Search'
@@ -61,6 +55,7 @@ select-network() {
 		--info=inline-right
 		--pointer=
 		--reverse
+		"${COLORS[@]}"
 	)
 
 	bssid=$(fzf "${opts[@]}" <<<"$networks" | awk '{print $1}')
@@ -85,7 +80,13 @@ connect-to-network() {
 }
 
 main() {
-	ensure-enabled
+	local status
+	status=$(nmcli radio wifi)
+
+	if [[ $status == 'disabled' ]]; then
+		nmcli radio wifi on
+		notify-send 'Wi-Fi Enabled' -i 'network-wireless-on' -r 1125
+	fi
 
 	tput civis # make cursor invisible
 	get-network-list || exit 1
