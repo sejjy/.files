@@ -2,6 +2,8 @@
 
 ## 📂 .files
 
+A simple Hyprland setup.
+
 | ![workflow](assets/workflow-0.png) |
 | :--------------------------------: |
 
