@@ -4,16 +4,16 @@
 
 A simple Hyprland setup.
 
-| ![workflow](assets/workflow-0.png) |
+| ![Workflow 0](assets/workflow-0.png) |
 | :--------------------------------: |
 
-| ![workflow](assets/workflow-1.png) |
+| ![Workflow 1](assets/workflow-1.png) |
 | :--------------------------------: |
 
-| ![desktop](assets/desktop.png) |
+| ![Desktop](assets/desktop.png) |
 | :----------------------------: |
 
-| ![hyprlock](assets/hyprlock.png) |
+| ![Hyprlock](assets/hyprlock.png) |
 | :------------------------------: |
 
 </div>
