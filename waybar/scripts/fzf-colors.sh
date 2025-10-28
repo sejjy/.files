@@ -1,41 +1,74 @@
 #!/usr/bin/env bash
 
-main() {
-	local file=$XDG_CONFIG_HOME/waybar/theme.css
+FILE="$XDG_CONFIG_HOME/waybar/theme.css"
+
+def-colors() {
 	local theme
-	theme=$(head -n 1 "$file" | awk '{print $2}')
-	local rosewater mauve red lavender text overlay0 surface1 surface0 base
+	theme=$(sed 1q "$FILE")
 
-	case $theme in
-		*"frappe")
-			rosewater='#f2d5cf' mauve='#ca9ee6'    red='#e78284'
-			lavender='#babbf1'  text='#c6d0f5'     overlay0='#737994'
-			surface1='#51576d'  surface0='#414559' base='#303446'
-			;;
-		*"latte")
-			rosewater='#dc8a78' mauve='#8839ef'    red='#d20f39'
-			lavender='#7287fd'  text='#4c4f69'     overlay0='#9ca0b0'
-			surface1='#bcc0cc'  surface0='#ccd0da' base='#eff1f5'
-			;;
-		*"macchiato")
-			rosewater='#f4dbd6' mauve='#c6a0f6'    red='#ed8796'
-			lavender='#b7bdf8'  text='#cad3f5'     overlay0='#6e738d'
-			surface1='#494d64'  surface0='#363a4f' base='#24273a'
-			;;
-		*"mocha")
-			rosewater='#f5e0dc' mauve='#cba6f7'    red='#f38ba8'
-			lavender='#b4befe'  text='#cdd6f4'     overlay0='#6c7086'
-			surface1='#45475a'  surface0='#313244' base='#1e1e2e'
-			;;
-	esac
+	declare -ga names
 
-	export COLORS=(
-		--color="bg+:$surface0,bg:$base,spinner:$rosewater,hl:$red"
-		--color="fg:$text,header:$red,info:$mauve,pointer:$rosewater"
-		--color="marker:$lavender,fg+:$text,prompt:$mauve,hl+:$red"
-		--color="selected-bg:$surface1"
-		--color="border:$overlay0,label:$text"
+	# Add themes here:
+	if [[ $theme == *"catppuccin"* ]]; then
+		names=(
+			'surface0' 'base'      'rosewater'
+			'red'      'text'      'red'
+			'mauve'    'rosewater' 'lavender'
+			'text'     'mauve'     'red'
+			'surface1' 'overlay0'  'text'
+		)
+	fi
+}
+
+get-hex() {
+	local defs
+	defs=$(sed -n '3,28p' "$FILE")
+
+	local n hex
+	declare -gA colors
+
+	for n in "${names[@]}"; do
+		read -r _ _ hex < <(grep " $n " <<< "$defs")
+		hex=${hex%;}
+
+		colors[$n]=$hex
+	done
+}
+
+map-colors() {
+	local -a maps=(
+		'_cur_bg' '_bg'      '_spinner'
+		'_hl'     '_fg'      '_header'
+		'_info'   '_pointer' '_marker'
+		'_cur_fg' '_prompt'  '_cur_hl'
+		'_sel_bg' '_border'  '_label'
 	)
+
+	local n
+	local i=0
+
+	for n in "${names[@]}"; do
+		declare -g "${maps[i]}"="${colors[$n]}"
+		((i++))
+	done
+}
+
+main() {
+	def-colors
+	get-hex
+	map-colors
+
+	# shellcheck disable=SC2154
+	# These variables are defined dynamically
+	declare -ga COLORS=(
+		"--color=bg+:$_cur_bg,         bg:$_bg,           spinner:$_spinner"
+		"--color=hl:$_hl,              fg:$_fg,           header:$_header"
+		"--color=info:$_info,          pointer:$_pointer, marker:$_marker"
+		"--color=fg+:$_cur_fg,         prompt:$_prompt,   hl+:$_cur_hl"
+		"--color=selected-bg:$_sel_bg, border:$_border,   label:$_label"
+	)
+
+	export COLORS
 }
 
 main
