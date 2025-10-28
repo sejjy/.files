@@ -1,49 +1,30 @@
-# vim:fileencoding=utf-8:foldmethod=marker
-
-# : Manager {{{
-
 [mgr]
 cwd = { fg = "#a6e3a1" }
-
 # hovered
 hovered         = { fg = "#cdd6f4", bg = "#313244" }
 preview_hovered = { fg = "#cdd6f4", bg = "#313244" }
-
 # find
 find_keyword  = { fg = "#f9e2af", italic = true }
 find_position = { fg = "#f5c2e7", bg = "reset", italic = true }
-
 # marker
 marker_copied   = { fg = "#a6e3a1", bg = "#a6e3a1" }
 marker_cut      = { fg = "#f38ba8", bg = "#f38ba8" }
 marker_marked   = { fg = "#94e2d5", bg = "#94e2d5" }
 marker_selected = { fg = "#89b4fa", bg = "#89b4fa" }
-
 # count
 count_copied   = { fg = "#1e1e2e", bg = "#a6e3a1" }
 count_cut      = { fg = "#1e1e2e", bg = "#f38ba8" }
 count_selected = { fg = "#1e1e2e", bg = "#89b4fa" }
-
 # border
 border_style = { fg = "#7f849c" }
-
 # highlighting
 syntect_theme = "~/.config/yazi/catppuccin-mocha.tmTheme"
-
-# : }}}
-
-# : Tabs {{{
 
 [tabs]
 active   = { fg = "#11111b", bg = "#b4befe", bold = true }
 inactive = { fg = "#b4befe", bg = "#1e1e2e" }
-
 # separator
 sep_outer = { open = "", close = "" }
-
-# : }}}
-
-# : Which {{{
 
 [which]
 cand            = { fg = "#89b4fa" }
@@ -53,19 +34,11 @@ rest            = { fg = "#9399b2" }
 separator       = " 󰁔 "
 separator_style = { fg = "#7f849c" }
 
-# : }}}
-
-# : Confirm {{{
-
 [confirm]
 border     = { fg = "#89b4fa" }
 btn_labels = [ "[Y]es", "[N]o" ]
 btn_yes    = { reversed = true }
 title      = { fg = "#89b4fa" }
-
-# : }}}
-
-# : Spot {{{
 
 [spot]
 border   = { fg = "#89b4fa" }
@@ -73,27 +46,15 @@ tbl_cell = { fg = "#89b4fa", reversed = true }
 tbl_col  = { bold = true }
 title    = { fg = "#89b4fa" }
 
-# : }}}
-
-# : Notify  {{{
-
 [notify]
 title_error = { fg = "#f38ba8" }
 title_info  = { fg = "#94e2d5" }
 title_warn  = { fg = "#f9e2af" }
 
-# : }}}
-
-# : Pick {{{
-
 [pick]
 active   = { fg = "#f5c2e7" }
 border   = { fg = "#89b4fa" }
 inactive = {}
-
-# : }}}
-
-# : Input {{{
 
 [input]
 border   = { fg = "#89b4fa" }
@@ -101,29 +62,16 @@ selected = { reversed = true }
 title    = {}
 value    = {}
 
-# : }}}
-
-# : Completion {{{
-
 [cmp]
 border = { fg = "#89b4fa" }
-
 icon_command = ""
 icon_file    = "󰈔"
 icon_folder  = "󰉋"
-
-# : }}}
-
-# : Tasks {{{
 
 [tasks]
 border  = { fg = "#89b4fa" }
 hovered = { underline = true }
 title   = {}
-
-# : }}}
-
-# : Help {{{
 
 [help]
 desc    = { fg = "#9399b2" }
@@ -132,31 +80,20 @@ hovered = { bg = "#585b70", bold = true }
 on      = { fg = "#94e2d5" }
 run     = { fg = "#f5c2e7" }
 
-# : }}}
-
-# : Filetype {{{
-
 [filetype]
 rules = [
 	# media
 	{ mime = "image/*", fg = "#cdd6f4" },
 	{ mime = "{audio,video}/*", fg = "#cdd6f4" },
-
 	# archives
 	{ mime = "application/*zip", fg = "#a6adc8" },
 	{ mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", fg = "#a6adc8" },
-
 	# documents
 	{ mime = "application/{pdf,doc,rtf}", fg = "#cdd6f4" },
-
 	# fallback
 	{ name = "*", fg = "#cdd6f4" },
 	{ name = "*/", fg = "#89b4fa" },
 ]
-
-# : }}}
-
-# : Icon {{{
 
 [icon]
 globs = [
@@ -400,5 +337,3 @@ prepend_conds = [
 	{ if = "dir", text = "󰉋" },           # directories
 	{ if = "link", text = "󱅷" },          # symlinks
 ]
-
-# : }}}
