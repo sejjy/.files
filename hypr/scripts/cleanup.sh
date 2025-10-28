@@ -22,8 +22,8 @@ remove-orphans() {
 clear-cache() {
 	printf '\n%bClearing package cache...%b\n' "$BLU" "$RST"
 
-	sudo paccache -rk2 2>/dev/null
-	sudo paccache -ruk0 2>/dev/null
+	sudo paccache -rk2 2> /dev/null
+	sudo paccache -ruk0 2> /dev/null
 
 	printf '\n%bPruning old AUR package cache...%b\n' "$BLU" "$RST"
 

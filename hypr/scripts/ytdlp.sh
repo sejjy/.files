@@ -7,7 +7,7 @@ RST='\033[0m'
 print-usage() {
 	local script=${0##*/}
 
-	cat <<-EOF
+	cat <<- EOF
 		USAGE: $script <URL> <format> <dirname> <filename>
 	EOF
 
@@ -20,7 +20,7 @@ main() {
 	local dir=${3:-"$HOME/Videos/Downloads"}
 	local name=${4:-'%(title)s.%(ext)s'}
 
-	if ! command -v yt-dlp >/dev/null; then
+	if ! command -v yt-dlp > /dev/null; then
 		printf '%bError: %byt-dlp%b is not installed\n' "$RED" "$BLU" "$RST"
 		exit 1
 	fi

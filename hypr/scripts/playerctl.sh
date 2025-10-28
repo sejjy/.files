@@ -4,7 +4,7 @@ MAXLEN=40
 
 main() {
 	local status
-	status=$(playerctl metadata --format '{{ status }}' 2>/dev/null)
+	status=$(playerctl metadata --format '{{ status }}' 2> /dev/null)
 
 	case $status in
 		Playing) icon='󰐊' ;;
@@ -12,10 +12,10 @@ main() {
 	esac
 
 	local title
-	title=$(playerctl metadata --format '{{ title }}' 2>/dev/null)
+	title=$(playerctl metadata --format '{{ title }}' 2> /dev/null)
 
 	local artist
-	artist=$(playerctl metadata --format '{{ artist }}' 2>/dev/null)
+	artist=$(playerctl metadata --format '{{ artist }}' 2> /dev/null)
 
 	local track="${title} — ${artist}"
 	local trlen=${#track}
@@ -24,7 +24,7 @@ main() {
 	fi
 
 	local output
-	output=$(playerctl metadata --format "$icon $track" 2>/dev/null)
+	output=$(playerctl metadata --format "$icon $track" 2> /dev/null)
 
 	echo "$output"
 }
