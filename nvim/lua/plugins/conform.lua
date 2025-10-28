@@ -38,7 +38,11 @@ return {
 
 		formatters = {
 			shfmt = {
-				prepend_args = { "--indent", "0", "--case-indent" },
+				prepend_args = {
+					"-ci", -- Switch cases will be indented.
+					"-sr", -- Redirect operators will be followed by a space.
+					-- "-kp", -- Keep column alignment paddings.
+				},
 			},
 		},
 	},
