@@ -68,3 +68,5 @@ end)
 vim.keymap.set({ "n", "x" }, "(", function()
 	vim.fn.search("[]'\")}>]", "bW")
 end)
+
+vim.keymap.set("n", "<Leader>z", ':!zen-browser "%"<Enter>', { desc = "open in [z]en" })

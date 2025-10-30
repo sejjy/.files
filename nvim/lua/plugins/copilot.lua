@@ -15,7 +15,7 @@ return {
 
 			suggestion = {
 				enabled = true,
-				auto_trigger = true,
+				-- auto_trigger = true,
 				debounce = 50, -- faster suggestions
 
 				keymap = {
