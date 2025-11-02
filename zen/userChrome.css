@@ -3,10 +3,13 @@
 .titlebar-buttonbox-container,
 .zen-workspace-close-unpinned-tabs-button,
 #home-button,
-#reload-button,
 #tabs-newtab-button,
 #zen-toggle-compact-mode {
 	display: none !important;
+}
+
+#reload-button {
+	visibility: hidden !important;
 }
 
 #urlbar[open] {
