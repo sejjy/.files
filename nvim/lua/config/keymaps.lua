@@ -36,16 +36,18 @@ vim.keymap.set("n", "<S-Enter>", "O<Esc>")
 vim.keymap.set({ "n", "v" }, "J", "mzJ`z")
 
 -- Void register
-vim.keymap.set("n", "x", '"_x')
-vim.keymap.set("x", "<Leader>p", '"_dP', { desc = "[p]aste" })
-vim.keymap.set({ "n", "v" }, "<Leader>d", '"_d', { desc = "[d]elete" })
+vim.keymap.set("n", "x", '"_x', { noremap = true })
+vim.keymap.set({ "n", "x" }, "c", '"_c', { noremap = true })
+vim.keymap.set("x", "<Leader>p", '"_dP', { desc = "[p]aste", noremap = true })
+vim.keymap.set({ "n", "v" }, "<Leader>d", '"_d', { desc = "[d]elete", noremap = true })
 
 -- Shell
 vim.keymap.set("n", "<Leader>cx", ":!chmod +x %<Enter>", { desc = "chmod +[x]" })
 vim.keymap.set("n", "<Leader>nf", ":!npm run format<Enter>", { desc = "npm run [f]ormat" })
 vim.keymap.set("n", "<Leader>np", ':!npx prettier --write "%"<Enter>', { desc = "npx [p]rettier --write" })
-vim.keymap.set("n", "<Leader>z", ':!zen-browser "%"<Enter>', { desc = "open in [z]en" })
+vim.keymap.set("n", "<Leader>z", ':silent !zen-browser "%"<Enter>', { desc = "open in [z]en" })
 
+-- Misc
 vim.keymap.set("n", "<Esc>", ":nohlsearch<Enter>", { silent = true })
 vim.keymap.set("n", "<Leader>ts", ":set spell!<Enter>", { desc = "toggle [s]pell check" })
 vim.keymap.set("n", "<Leader>rn", ":%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>", { desc = "re[n]ame" })
