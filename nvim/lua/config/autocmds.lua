@@ -1,4 +1,4 @@
--- highlight cursorline
+-- Highlight cursorline
 local cursor_group = vim.api.nvim_create_augroup("CursorGroup", { clear = true })
 
 vim.api.nvim_create_autocmd("InsertLeave", {
@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 	end,
 })
 
--- save folds
+-- Save folds
 local fold_group = vim.api.nvim_create_augroup("FoldGroup", { clear = true })
 
 vim.api.nvim_create_autocmd("BufWinLeave", {
@@ -38,7 +38,7 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 	end,
 })
 
--- highlight text after yank
+-- Highlight text after yank
 local yank_group = vim.api.nvim_create_augroup("YankGroup", { clear = true })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -48,15 +48,15 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
--- lsp
+-- LSP
 local lsp_group = vim.api.nvim_create_augroup("LspGroup", { clear = true })
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = lsp_group,
 	callback = function(event)
-		-- on attach...
+		-- On attach...
 		local bufnum = event.buf
-		-- highlight references
+		-- Highlight references
 		local hl_group = vim.api.nvim_create_augroup("HlGroup", { clear = false })
 
 		vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
@@ -87,7 +87,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			end,
 		})
 
-		-- lsp keymaps
+		-- LSP keymaps
 		local picker = require("snacks").picker
 		local function gdesc(desc)
 			return { desc = "LSP: goto " .. desc }
@@ -96,7 +96,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			return { desc = "LSP: " .. desc }
 		end
 
-		-- goto
+		-- Goto
 		vim.keymap.set("n", "grd", vim.lsp.buf.declaration, gdesc("[d]eclaration"))
 		vim.keymap.set("n", "gd", picker.lsp_definitions, gdesc("[d]efinition"))
 		vim.keymap.set("n", "grr", picker.lsp_references, gdesc("[r]eferences"))
@@ -117,7 +117,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
--- fix for https://github.com/folke/lazy.nvim/issues/1951
+-- https://github.com/folke/lazy.nvim/issues/1951
 local lazy_group = vim.api.nvim_create_augroup("LazyGroup", { clear = true })
 
 vim.api.nvim_create_autocmd("FileType", {

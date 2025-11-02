@@ -14,7 +14,7 @@ return {
 				return { desc = "Git: toggle " .. desc, buffer = bufnr }
 			end
 
-			-- navigation
+			-- Navigation
 			vim.keymap.set("n", "]c", function()
 				if vim.wo.diff then
 					vim.cmd.normal({ "]c", bang = true })
@@ -31,7 +31,7 @@ return {
 				end
 			end, hdesc("previous change"))
 
-			-- actions
+			-- Actions
 			vim.keymap.set("n", "<Leader>gs", gitsigns.stage_hunk, hdesc("[s]tage"))
 			vim.keymap.set("n", "<Leader>gr", gitsigns.reset_hunk, hdesc("[r]eset"))
 
@@ -63,12 +63,12 @@ return {
 
 			vim.keymap.set("n", "<Leader>gq", gitsigns.setqflist, hdesc("[q]uickfix hunks"))
 
-			-- toggles
+			-- Toggles
 			vim.keymap.set("n", "<Leader>tb", gitsigns.toggle_current_line_blame, tdesc("current line [b]lame"))
 			vim.keymap.set("n", "<Leader>tl", gitsigns.toggle_deleted, tdesc("deleted [l]ines"))
 			vim.keymap.set("n", "<Leader>tw", gitsigns.toggle_word_diff, tdesc("[w]ord diff"))
 
-			-- text object
+			-- Text object
 			vim.keymap.set({ "o", "x" }, "ih", gitsigns.select_hunk, { desc = "inner [h]unk", buffer = bufnr })
 		end,
 	},

@@ -17,12 +17,6 @@ vim.diagnostic.config({
 	},
 })
 
--- disable italics
-vim.cmd("hi DiagnosticVirtualTextError gui=NONE")
-vim.cmd("hi DiagnosticVirtualTextWarn gui=NONE")
-vim.cmd("hi DiagnosticVirtualTextInfo gui=NONE")
-vim.cmd("hi DiagnosticVirtualTextHint gui=NONE")
-
 vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { undercurl = true })
 vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { undercurl = true })
 vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", { undercurl = true })
