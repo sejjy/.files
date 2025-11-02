@@ -142,7 +142,6 @@ alias tks='tmux kill-server'
 # scripts
 alias clean="$XDG_CONFIG_HOME/hypr/scripts/cleanup.sh"
 alias server="$XDG_CONFIG_HOME/hypr/scripts/server.sh"
-alias ytd="$XDG_CONFIG_HOME/hypr/scripts/ytdlp.sh"
 
 # misc
 alias discord='discord --ozone-platform-hint=auto'

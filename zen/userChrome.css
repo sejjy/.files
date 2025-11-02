@@ -1,12 +1,3 @@
-/*
-	zenplified - Zen Browser, simplified.
-
-	Author: Jesse Mirabel <sejjymvm@gmail.com>
-	Updated: October 27, 2025
-	Version: 1.17.2b
-	License: MIT
-*/
-
 .tab-close-button,
 .tab-icon-overlay,
 .titlebar-buttonbox-container,
@@ -16,13 +7,6 @@
 #tabs-newtab-button,
 #zen-toggle-compact-mode {
 	display: none !important;
-}
-
-#urlbar {
-	position: fixed !important;
-	width: 40vw !important;
-	left: 30vw !important;
-	right: 30vw !important;
 }
 
 #urlbar[open] {

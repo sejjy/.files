@@ -1,12 +1,3 @@
-/*
-	zenplified - Zen Browser, simplified.
-
-	Author: Jesse Mirabel <sejjymvm@gmail.com>
-	Updated: October 27, 2025
-	Version: 1.17.2b
-	License: MIT
-*/
-
 @-moz-document url-prefix("chrome:"),
                url("about:blank"),
                url("about:home"),
