@@ -3,16 +3,17 @@
 DIR=~/Pictures/Screenshots
 
 main() {
+	local target=$1
+
 	local i=1
 	while [[ -e "$DIR/Screenshot ($i).png" ]]; do
 		((i++))
 	done
 
 	local name="Screenshot ($i).png"
-	local target=$1
 	local file="$DIR/$name"
 
-	if [[ $target == area ]]; then
+	if [[ $target == 'area' ]]; then
 		grimblast --freeze copysave "$target" "$file"
 	else
 		grimblast copysave "$target" "$file"

@@ -2,31 +2,30 @@
 
 MAXLEN=40
 
+get-output() {
+	playerctl metadata --format "{{ markup_escape($1) }}" 2> /dev/null
+}
+
 main() {
 	local status
-	status=$(playerctl metadata --format '{{ status }}' 2> /dev/null)
+	status=$(get-output 'status')
 
 	case $status in
-		Playing) icon='󰐊' ;;
-		Paused) icon='󰏤' ;;
+		'Playing') icon='󰐊' ;;
+		'Paused') icon='󰏤' ;;
 	esac
 
-	local title
-	title=$(playerctl metadata --format '{{ title }}' 2> /dev/null)
+	local title artist
+	title=$(get-output 'title')
+	artist=$(get-output 'artist')
 
-	local artist
-	artist=$(playerctl metadata --format '{{ artist }}' 2> /dev/null)
-
-	local track="${title} — ${artist}"
-	local trlen=${#track}
-	if ((trlen > MAXLEN)); then
-		track="${track:0:$((MAXLEN - 1))}…"
+	local track="$title — $artist"
+	if ((${#track} > MAXLEN)); then
+		track=${track:0:MAXLEN}
+		track+='…'
 	fi
 
-	local output
-	output=$(playerctl metadata --format "$icon $track" 2> /dev/null)
-
-	echo "$output"
+	echo "$icon $track"
 }
 
 main
