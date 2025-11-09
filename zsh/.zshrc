@@ -6,7 +6,7 @@ if [[ -r "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
 fi
 
 #-------------#
-#	Options
+#	options   #
 #-------------#
 
 setopt AUTO_CD
@@ -20,7 +20,7 @@ setopt HASH_LIST_ALL
 setopt CORRECT
 
 #----------------#
-#	Parameters
+#	parameters   #
 #----------------#
 
 HISTFILE="$ZDOTDIR/.zsh_history"
@@ -29,12 +29,11 @@ SAVEHIST=5000
 ZLE_RPROMPT_INDENT=0
 
 #----------------#
-#	Completion
+#	completion   #
 #----------------#
 
 autoload -Uz compinit
 compinit
-
 zstyle ':completion:*:descriptions' format '%B%F{blue}%d%f%b'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
@@ -42,19 +41,20 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' rehash true
 
 #-------------#
-#	Keymaps
+#	keymaps   #
 #-------------#
 
 bindkey -v # vi mode
 bindkey '^ ' autosuggest-accept
 
 #-------------#
-#	Aliases
+#	aliases   #
 #-------------#
 
 # shell
 alias reload='exec zsh'
-alias e='y' # yazi
+alias c='clear'
+alias e='y'  # yazi
 alias z='cd' # zoxide
 alias :q='exit'
 
@@ -96,10 +96,8 @@ alias gi='git init'
 alias ga='git add'
 alias gc='git commit'
 alias gcm='git commit -m'
-alias grhs='git reset --soft HEAD~1'
-alias grhm='git reset --mixed HEAD~1'
-alias grhh='git reset --hard HEAD~1'
-alias gcd='git clean -d'
+alias gr='git reset'
+alias gcd='git clean -d --force'
 alias grs='git restore --staged'
 alias gb='git branch'
 alias gco='git checkout'
@@ -112,7 +110,6 @@ alias gstp='git stash pop'
 alias gl='git log'
 alias glo='git log --graph --oneline'
 alias gd='git diff | bat'
-alias gdh='git diff HEAD~1 | bat'
 
 # vim
 alias v='vim'
@@ -148,7 +145,7 @@ alias discord='discord --ozone-platform-hint=auto'
 alias np="playerctl metadata -af '{{ title }} - {{ artist }}'"
 
 #-------------#
-#	Exports
+#	exports   #
 #-------------#
 
 export EDITOR='nvim'
@@ -156,13 +153,12 @@ export MANPAGER='nvim +Man!'
 export FZF_DEFAULT_OPTS='--color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8,fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC,marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8,selected-bg:#45475A,border:#6C7086,label:#CDD6F4'
 
 #-------------#
-#	Plugins
+#	plugins   #
 #-------------#
 
 # Better vi mode
 # https://github.com/jeffreytse/zsh-vi-mode
 source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-
 ZVM_CURSOR_STYLE_ENABLED=false
 ZVM_VI_SURROUND_BINDKEY='s-prefix'
 ZVM_VI_HIGHLIGHT_FOREGROUND=#cdd6f4
@@ -177,7 +173,6 @@ ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 # Prompt
 # https://github.com/romkatv/powerlevel10k
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-
 # To customize prompt, run `p10k configure` or edit "$ZDOTDIR/.p10k.zsh".
 [[ ! -f "$ZDOTDIR/.p10k.zsh" ]] || source "$ZDOTDIR/.p10k.zsh"
 
@@ -194,7 +189,7 @@ typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIINS_CONTENT_EXPANSION='>'
 typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 
 #----------------#
-#	Extensions
+#	extensions   #
 #----------------#
 
 # Smarter cd
@@ -202,36 +197,30 @@ typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 eval "$(zoxide init --cmd cd zsh)"
 
 #---------------#
-#	Functions
+#	functions   #
 #---------------#
 
 # pacman -F "command not found" handler
 # https://wiki.archlinux.org/title/Zsh
 function command_not_found_handler() {
 	printf 'zsh: Command not found: %s\n' "$1"
-
 	local entries=(${(f)"$(/usr/bin/pacman -F --machinereadable -- "/usr/bin/$1")"})
 	local purple='\e[1;35m'
 	local bright='\e[0;1m'
 	local green='\e[1;32m'
 	local reset='\e[0m'
-
 	if (( ${#entries[@]} )); then
 		printf "${bright}$1${reset} may be found in the following packages:\n"
 		local pkg
-
 		for entry in "${entries[@]}"; do
 			local fields=(${(0)entry})
-
 			if [[ "$pkg" != "${fields[2]}" ]]; then
 				printf "${purple}%s/${bright}%s ${green}%s${reset}\n" "${fields[1]}" "${fields[2]}" "${fields[3]}"
 			fi
-
 			printf '\t/%s\n' "${fields[4]}"
 			pkg="${fields[2]}"
 		done
 	fi
-
 	return 127
 }
 
@@ -239,11 +228,8 @@ function command_not_found_handler() {
 # https://yazi-rs.github.io/docs/quick-start
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-
 	yazi "$@" --cwd-file="$tmp"
-
 	IFS= read -r -d '' cwd < "$tmp"
 	[[ -n "$cwd" ]] && [[ "$cwd" != "$PWD" ]] && builtin cd -- "$cwd"
-
 	rm -f -- "$tmp"
 }
