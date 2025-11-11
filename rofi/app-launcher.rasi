@@ -3,8 +3,8 @@
 @theme "~/.config/rofi/theme.rasi"
 
 configuration {
-	font:                   "JetBrainsMono Nerd Font 12";
-	display-drun:           " ";
+	font:                   "0xProto Nerd Font 12";
+	display-drun:           " ";
 	drun-display-format:    "{name}";
 }
 
@@ -47,7 +47,7 @@ listview {
 	dynamic:                false;
 	cycle:                  true;
 	margin:                 0 0 -2px;
-	padding:                8px 8px 54px;
+	padding:                8px 8px 53px;
 	background-color:       @main-bg;
 }
 
@@ -80,7 +80,7 @@ element-text {
 /* input */
 
 inputbar {
-	margin:                 -44px 8px 8px;
+	margin:                 -43px 8px 8px;
 	border-radius:          8px;
 	spacing:                inherit;
 	background-color:       @input-bg;
@@ -96,7 +96,7 @@ prompt {
 
 entry {
 	placeholder:            "Search";
-	padding:                8px 12px 8px 6px;
+	padding:                8px 12px 8px 0;
 	cursor:                 text;
 	background-color:       inherit;
 	text-color:             inherit;

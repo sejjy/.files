@@ -3,7 +3,7 @@
 @theme "~/.config/rofi/theme.rasi"
 
 configuration {
-	font:                   "JetBrainsMono Nerd Font 12";
+	font:                   "0xProto Nerd Font 12";
 	window-format:          "{c:10} :: {t}";
 }
 
@@ -45,8 +45,7 @@ listview {
 	fixed-height:           false;
 	dynamic:                false;
 	cycle:                  false;
-	margin:                 0 0 -2px;
-	padding:                8px 8px 8px;
+	padding:                8px;
 	background-color:       @main-bg;
 }
 
