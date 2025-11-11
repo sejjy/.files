@@ -6,38 +6,46 @@ return {
 	},
 
 	opts = {
-		default_explorer = true,
+		views = {
+			finder = {
+				default_explorer = true,
 
-		git_status = {
-			symbols = {
-				Untracked = "??",
-				Added = " A",
-				Modified = " M",
-				Deleted = " D",
-				Renamed = " R",
-				Copied = " C",
-				Conflict = "!!",
-				Ignored = "--",
-			},
-		},
+				git_status = {
+					symbols = {
+						Untracked = "??",
+						Added = " A",
+						Modified = " M",
+						Deleted = " D",
+						Renamed = " R",
+						Copied = " C",
+						Conflict = "!!",
+						Ignored = "--",
+					},
+				},
 
-		icon = {
-			directory_collapsed = "󰉋",
-			directory_expanded = "󰝰",
-		},
+				icon = {
+					directory_collapsed = "󰉋",
+					directory_expanded = "󰝰",
+				},
 
-		win = {
-			kind = "float",
-			kind_presets = {
-				float = {
-					width = "37abs",
-					height = "0.9rel",
-					left = "none",
-					right = "0abs",
-					top = "0abs",
+				win = {
+					kind = "float",
+					kinds = {
+						float = {
+							width = "22%",
+							height = "90%",
+							top = "0%",
+							left = "100%",
+						},
+					},
+					win_opts = {
+						winhighlight = "Normal:NormalFloat",
+						cursorline = true,
+						number = true,
+						relativenumber = true,
+					},
 				},
 			},
-			win_opts = { winhighlight = "Normal:NormalFloat" },
 		},
 	},
 }
