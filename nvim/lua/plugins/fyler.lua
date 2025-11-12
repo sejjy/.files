@@ -2,7 +2,7 @@ return {
 	"A7Lavinraj/fyler.nvim",
 
 	keys = {
-		{ "<Leader>e", ":Fyler<Enter>", desc = "[e]xplorer" },
+		{ "<Leader>e", ":Fyler<Enter>", desc = "[e]xplorer", silent = true },
 	},
 
 	opts = {
