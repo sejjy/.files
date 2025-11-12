@@ -45,7 +45,7 @@ vim.keymap.set({ "n", "v" }, "<Leader>d", '"_d', { desc = "[d]elete", noremap = 
 vim.keymap.set("n", "<Leader>cx", ":!chmod +x %<Enter>", { desc = "chmod +[x]" })
 vim.keymap.set("n", "<Leader>nf", ":!npm run format<Enter>", { desc = "npm run [f]ormat" })
 vim.keymap.set("n", "<Leader>np", ':!npx prettier --write "%"<Enter>', { desc = "npx [p]rettier --write" })
-vim.keymap.set("n", "<Leader>z", ':silent !zen-browser "%"<Enter>', { desc = "open in [z]en" })
+vim.keymap.set("n", "<Leader>b", ':silent !zen-browser "%"<Enter>', { desc = "open in [b]rowser" })
 
 -- Misc
 vim.keymap.set("n", "<Esc>", ":nohlsearch<Enter>", { silent = true })
