@@ -1,4 +1,10 @@
 {
+	/*------------------------------------------------------------
+	    regression: wildcard includes are broken after v0.14.0
+	      - https://github.com/Alexays/Waybar/issues/4354
+	      - https://github.com/sejjy/mechabar/issues/31
+	------------------------------------------------------------*/
+	/*
 	"include": [
 		"~/.config/waybar/modules/*.jsonc",
 		"~/.config/waybar/modules/custom/*.jsonc",
@@ -6,6 +12,40 @@
 
 		// modules that are not included by default:
 		// "~/.config/waybar/modules/extras/*.jsonc"
+	],
+	*/
+
+	"include": [
+		// modules-left
+		"~/.config/waybar/modules/custom/user.jsonc",
+		"~/.config/waybar/modules/hyprland/workspaces.jsonc",
+		"~/.config/waybar/modules/hyprland/window.jsonc",
+
+		// modules-center
+		"~/.config/waybar/modules/hyprland/windowcount.jsonc",
+		"~/.config/waybar/modules/temperature.jsonc",
+		"~/.config/waybar/modules/memory.jsonc",
+		"~/.config/waybar/modules/cpu.jsonc",
+		"~/.config/waybar/modules/custom/distro.jsonc",
+		"~/.config/waybar/modules/idle_inhibitor.jsonc",
+		"~/.config/waybar/modules/clock.jsonc",
+		"~/.config/waybar/modules/network.jsonc",
+		"~/.config/waybar/modules/bluetooth.jsonc",
+		"~/.config/waybar/modules/custom/system_update.jsonc",
+
+		// modules-right
+		"~/.config/waybar/modules/mpris.jsonc",
+		"~/.config/waybar/modules/pulseaudio.jsonc",
+		"~/.config/waybar/modules/backlight.jsonc",
+		"~/.config/waybar/modules/battery.jsonc",
+		"~/.config/waybar/modules/custom/power_menu.jsonc",
+
+		"~/.config/waybar/modules/custom/dividers.jsonc"
+
+		// modules that are not included by default:
+		// "~/.config/waybar/modules/extras/taskbar.jsonc",
+		// "~/.config/waybar/modules/extras/tray.jsonc",
+		// "~/.config/waybar/modules/extras/wireplumber.jsonc"
 	],
 
 	/*------------
@@ -58,6 +98,9 @@
 	    options
 	-------------*/
 
+	// "expand-center":
+	// "expand-left":
+	// "expand-right":
 	"layer": "top",
 	// "output":
 	// "position":
@@ -68,6 +111,7 @@
 	// "margin-left":
 	// "margin-bottom":
 	// "margin-right":
+	// "no-center":
 	"spacing": 0,
 	// "name":
 	"mode": "dock",
@@ -79,4 +123,6 @@
 	// "ipc":
 	// "id":
 	"reload_style_on_change": true
+	// "on-sigusr1":
+	// "on-sigusr2":
 }
