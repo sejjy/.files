@@ -135,6 +135,7 @@ alias ta='tmux attach-session'
 alias tls='tmux list-sessions'
 alias tk='tmux kill-session'
 alias tks='tmux kill-server'
+alias tc='tmux clearhist'
 
 # scripts
 alias clean="$XDG_DATA_HOME/bin/cleanup.sh"
