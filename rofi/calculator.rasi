@@ -3,7 +3,7 @@
 @theme "~/.config/rofi/theme.rasi"
 
 configuration {
-	font:                   "0xProto Nerd Font 12";
+	font:                   "Commit Mono Nerd Font 12";
 	calc-display-format:    "{name}";
 }
 
@@ -11,6 +11,7 @@ configuration {
 
 window {
 	width:                  375px;
+	height:                 138px;
 	border:                 4px;
 	border-radius:          12px;
 	border-color:           @main-br;
@@ -27,8 +28,7 @@ mainbox {
 
 textbox-custom {
 	horizontal-align:       0.5;
-	padding:                1px 0;
-	expand:                 false;
+	padding:                2px 0;
 	background-color:       @select-bg;
 	text-color:             @select-fg;
 	expand:                 false;
@@ -41,16 +41,15 @@ message {
 	border:                 2px 0 0;
 	border-radius:          10px;
 	border-color:           @main-br;
-	lines:                  7;
 	cycle:                  false;
-	margin:                 0 0 -2px;
-	padding:                8px 8px 53px;
+	margin:                 0 0 -4px;
+	padding:                8px 8px 56px;
 	background-color:       @main-bg;
 	text-color:             @main-fg;
 }
 
 textbox {
-	font:                   "0xProto Nerd Font 18";
+	font:                   "Commit Mono Nerd Font 18";
 	horizontal-align:       1;
 	padding:                8px;
 	background-color:       inherit;
@@ -60,7 +59,7 @@ textbox {
 /* input */
 
 inputbar {
-	margin:                 -43px 8px 8px;
+	margin:                 -40px 8px 8px;
 	border-radius:          8px;
 	spacing:                inherit;
 	background-color:       @input-bg;

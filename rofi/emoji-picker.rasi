@@ -3,7 +3,7 @@
 @theme "~/.config/rofi/theme.rasi"
 
 configuration {
-	font:                   "0xProto Nerd Font 12";
+	font:                   "Commit Mono Nerd Font 12";
 	display-emoji:          " ";
 }
 
@@ -19,6 +19,7 @@ window {
 }
 
 mainbox {
+	margin:                 0 0 -1px;
 	spacing:                0;
 	background-color:       @main-br;
 	text-color:             @main-fg;
@@ -28,7 +29,6 @@ mainbox {
 textbox-custom {
 	horizontal-align:       0.5;
 	padding:                1px 0;
-	expand:                 false;
 	background-color:       @select-bg;
 	text-color:             @select-fg;
 	expand:                 false;
@@ -38,16 +38,16 @@ textbox-custom {
 /* list */
 
 listview {
-	border:                 2px 0 0 0;
+	border:                 2px 0 0;
 	border-radius:          10px;
 	border-color:           @main-br;
-	lines:                  4;
+	lines:                  5;
 	columns:                5;
 	fixed-columns:          true;
 	dynamic:                false;
-	cycle:                  false;
-	margin:                 0 0 -2px;
-	padding:                8px 8px 53px;
+	cycle:                  true;
+	margin:                 0 0 -24px;
+	padding:                8px;
 	background-color:       @main-bg;
 }
 
@@ -66,8 +66,8 @@ element selected normal {
 }
 
 element-text {
-	font:                   "0xProto Nerd Font 18";
-	padding:                10px 0 6px 11px;
+	font:                   "Commit Mono Nerd Font 18";
+	padding:                10px 0 10px 11px;
 	cursor:                 inherit;
 	background-color:       inherit;
 	text-color:             inherit;
@@ -76,7 +76,7 @@ element-text {
 /* input */
 
 inputbar {
-	margin:                 -43px 8px 8px;
+	margin:                 -40px 8px 8px;
 	border-radius:          8px;
 	spacing:                inherit;
 	background-color:       @input-bg;
