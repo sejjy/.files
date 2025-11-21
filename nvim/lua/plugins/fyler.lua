@@ -32,9 +32,9 @@ return {
 					kind = "float",
 					kinds = {
 						float = {
-							width = "22%",
+							width = "37",
 							height = "90%",
-							top = "0%",
+							top = "0",
 							left = "100%",
 						},
 					},
