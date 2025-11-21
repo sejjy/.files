@@ -11,8 +11,8 @@
 # Created: August 19, 2025
 # License: MIT
 
-# get fzf color config
-# shellcheck disable=SC1090
+# Get fzf color config
+# shellcheck disable=SC1090,SC2154
 . ~/.config/waybar/scripts/fzf-colors.sh 2> /dev/null
 
 RED='\033[1;31m'
@@ -20,7 +20,7 @@ RST='\033[0m'
 
 TIMEOUT=10
 
-check-status() {
+ensure-on() {
 	local status
 	status=$(bluetoothctl show | grep PowerState | awk '{print $2}')
 	if [[ $status == 'off' ]]; then
@@ -68,7 +68,7 @@ select-device() {
 		--info=inline-right
 		--pointer=
 		--reverse
-		"${COLORS[@]}"
+		"${fcconf[@]}"
 	)
 
 	address=$(fzf "${opts[@]}" <<< "$list" | awk '{print $1}')
@@ -98,15 +98,15 @@ pair-and-connect() {
 	fi
 
 	printf '\nConnecting...'
-	if timeout $TIMEOUT bluetoothctl connect "$address" > /dev/null; then
-		notify-send 'Bluetooth' 'Successfully connected' -i 'package-install'
-	else
+	if ! timeout $TIMEOUT bluetoothctl connect "$address" > /dev/null; then
 		notify-send 'Bluetooth' 'Failed to connect' -i 'package-purge'
+		return 1
 	fi
+	notify-send 'Bluetooth' 'Successfully connected' -i 'package-install'
 }
 
 main() {
-	check-status
+	ensure-on
 	tput civis
 	get-device-list || exit 1
 	tput cnorm

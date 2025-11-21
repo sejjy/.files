@@ -11,8 +11,8 @@
 # Created: August 11, 2025
 # License: MIT
 
-# get fzf color config
-# shellcheck disable=SC1090
+# Get fzf color config
+# shellcheck disable=SC1090,SC2154
 . ~/.config/waybar/scripts/fzf-colors.sh 2> /dev/null
 
 RED='\033[1;31m'
@@ -20,12 +20,13 @@ RST='\033[0m'
 
 TIMEOUT=5
 
-check-status() {
+ensure-enabled() {
 	local radio
 	radio=$(nmcli radio wifi)
-	if [[ $radio == 'disabled' ]]; then
-		nmcli radio wifi on
+	if [[ $radio == 'enabled' ]]; then
+		return
 	fi
+	nmcli radio wifi on
 
 	local i state
 	local is_ready=false
@@ -35,7 +36,7 @@ check-status() {
 
 		state=$(nmcli -t -f STATE general)
 		# If STATE returns anything other than this, we assume that Wi-Fi is
-		# fully initialized.
+		# fully initialized
 		if [[ $state != 'connected (local only)' ]]; then
 			is_ready=true
 			break
@@ -86,7 +87,7 @@ select-network() {
 		--info=inline-right
 		--pointer=
 		--reverse
-		"${COLORS[@]}"
+		"${fcconf[@]}"
 	)
 
 	bssid=$(fzf "${opts[@]}" <<< "$networks" | awk '{print $1}')
@@ -110,7 +111,7 @@ connect-to-network() {
 }
 
 main() {
-	check-status || exit 1
+	ensure-enabled || exit 1
 	tput civis
 	get-network-list || exit 1
 	tput cnorm
