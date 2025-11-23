@@ -10,19 +10,6 @@ return {
 			finder = {
 				default_explorer = true,
 
-				git_status = {
-					symbols = {
-						Untracked = "??",
-						Added = " A",
-						Modified = " M",
-						Deleted = " D",
-						Renamed = " R",
-						Copied = " C",
-						Conflict = "!!",
-						Ignored = "--",
-					},
-				},
-
 				icon = {
 					directory_collapsed = "󰉋",
 					directory_expanded = "󰝰",
