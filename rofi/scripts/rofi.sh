@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Display a Rofi menu based on the argument provided
+# Launch a Rofi menu based on the argument passed
 #
 # Requirements:
 # 	- rofi
@@ -14,36 +14,41 @@
 # License: MIT
 
 main() {
-	local arg=$1
-	local dir="$XDG_CONFIG_HOME/rofi"
+	local rdir=~/.config/rofi
 
-	case $arg in
-		'A') # app launcher
+	case $1 in
+		'A')
+			# App launcher
 			pkill rofi ||
-				rofi -show drun -disable-history -show-icons \
-					-config "$dir/app-launcher.rasi"
+				  rofi -show drun -disable-history -show-icons \
+					   -config "$rdir/app-launcher.rasi"
 			;;
-		'V') # clipboard
+		'V')
+			# Clipboard
+			pkill rofi || cliphist list |
+				  rofi -dmenu -p ' ' -display-columns 2 \
+					   -config "$rdir/clipboard.rasi" | cliphist decode | wl-copy
+			;;
+		'X')
+			# Calculator
 			pkill rofi ||
-				cliphist list | rofi -dmenu -p ' ' -display-columns 2 \
-					-config "$dir/clipboard.rasi" | cliphist decode | wl-copy
+				  rofi -show calc -modi calc -no-show-match -no-sort \
+					   -no-history -lines 0 -terse \ -hint-welcome '' \
+					   -hint-result '' -kb-accept-entry '' \
+					   -config "$rdir/calculator.rasi"
 			;;
-		'X') # calculator
+		'M')
+			# Emoji picker
 			pkill rofi ||
-				rofi -show calc -modi calc -no-show-match -no-sort \
-					-no-history -lines 0 -terse -config "$dir/calculator.rasi" \
-					-hint-welcome '' -hint-result '' -kb-accept-entry ''
+				  rofi -modi emoji -show emoji -emoji-format '{emoji}' \
+					   -kb-accept-alt '' -kb-secondary-copy '' \
+					   -kb-custom-1 Ctrl+c -config "$rdir/emoji-picker.rasi"
 			;;
-		'M') # emoji picker
-			pkill rofi ||
-				rofi -modi emoji -show emoji -kb-secondary-copy '' \
-					-kb-custom-1 Ctrl+c -kb-accept-alt '' \
-					-config "$dir/emoji-picker.rasi" -emoji-format '{emoji}'
+		'W')
+			# Window switcher
+			pkill rofi || rofi -show window -config "$rdir/window-switcher.rasi"
 			;;
-		'W') # window switcher
-			pkill rofi ||
-				rofi -show window -config "$dir/window-switcher.rasi"
-			;;
+		*) exit 1 ;;
 	esac
 }
 

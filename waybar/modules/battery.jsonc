@@ -28,8 +28,8 @@
 		// "on-scroll-down":
 		// "smooth-scrolling-threshold":
 		// "tooltip":
-		"tooltip-format": "Discharging: {time}",
-		"tooltip-format-charging": "Charging: {time}",
+		"tooltip-format": "<b>Discharging</b>: {time}",
+		"tooltip-format-charging": "<b>Charging</b>: {time}",
 		// "weighted-average":
 		// "bat-compatibility":
 		// "menu":
@@ -37,7 +37,7 @@
 		// "menu-actions":
 		// "expand":
 		"events": {
-			"on-discharging-warning": "notify-send 'Battery Low (20%)' -i 'battery-020'",
+			"on-discharging-warning": "notify-send 'Battery Low (20%)' -u critical -i 'battery-020'",
 			"on-discharging-critical": "notify-send 'Battery Critical (10%)' -u critical -i 'battery-010'",
 			"on-charging-100": "notify-send 'Battery Full (100%)' -i 'battery-100-charged'"
 		}
