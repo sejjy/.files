@@ -26,9 +26,9 @@ clear-cache() {
 
 	printf '\n%bPruning old AUR package cache...%b\n' "$BLU" "$RST"
 
-	local ydir=~/.cache/yay
-	if [[ -d $ydir ]]; then
-		paccache -rk2 --cachedir "$ydir"
+	local ycdir=~/.cache/yay
+	if [[ -d $ycdir ]]; then
+		paccache -rk2 --cachedir "$ycdir"
 		yay -Sc --noconfirm
 	else
 		printf '\n%bYay cache directory not found.%b\n' "$RED" "$RST"

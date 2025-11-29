@@ -8,8 +8,8 @@
 # Add the following to /etc/udev/rules.d/60-power.rules and replace <user> with
 # your username:
 #
-# ACTION=="change", SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ATTR{online}=="1", RUN+="/usr/bin/su <user> -c '~/.local/share/bin/battery-state.sh charging'"
-# ACTION=="change", SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ATTR{online}=="0", RUN+="/usr/bin/su <user> -c '~/.local/share/bin/battery-state.sh discharging'"
+# ACTION=="change", SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ATTR{online}=="1", RUN+="/usr/bin/su <user> -c '/home/<user>/.local/bin/battery.sh charging'"
+# ACTION=="change", SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ATTR{online}=="0", RUN+="/usr/bin/su <user> -c '/home/<user>/.local/bin/battery.sh discharging'"
 #
 # Reload udev rules by running:
 # sudo udevadm control --reload
