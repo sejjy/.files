@@ -33,7 +33,7 @@ main() {
 			# Calculator
 			pkill rofi ||
 				  rofi -show calc -modi calc -no-show-match -no-sort \
-					   -no-history -lines 0 -terse \ -hint-welcome '' \
+					   -no-history -lines 0 -terse -hint-welcome '' \
 					   -hint-result '' -kb-accept-entry '' \
 					   -config "$rdir/calculator.rasi"
 			;;
