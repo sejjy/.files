@@ -38,11 +38,20 @@ return {
 
 		formatters = {
 			shfmt = {
-				prepend_args = {
-					"-ci", -- Switch cases will be indented.
-					"-sr", -- Redirect operators will be followed by a space.
-					-- "-kp", -- Keep column alignment paddings.
-				},
+				-- Respect .editorconfig if present
+				args = function(_, ctx)
+					local has_ec = vim.fs.find(".editorconfig", { path = vim.fn.getcwd() })
+					if #has_ec > 0 then
+						return { "-filename", ctx.filename }
+					else
+						return {
+							"--case-indent",
+							"--space-redirects",
+							"-filename",
+							ctx.filename,
+						}
+					end
+				end,
 			},
 		},
 	},
