@@ -138,8 +138,8 @@ alias tks='tmux kill-server'
 alias tc='tmux clearhist'
 
 # scripts
-alias clean="$XDG_DATA_HOME/bin/cleanup.sh"
-alias server="$XDG_DATA_HOME/bin/server.sh"
+alias clean="$HOME/.local/bin/cleanup.sh"
+alias server="$HOME/.local/bin/server.sh"
 
 # misc
 alias discord='discord --ozone-platform-hint=auto'
