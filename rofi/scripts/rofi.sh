@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Launch a Rofi menu based on the argument passed
+# Launch a Rofi menu based on the option passed
 #
 # Requirements:
 # 	- rofi
@@ -13,42 +13,72 @@
 # Created: January 3, 2025
 # License: MIT
 
-main() {
-	local rdir=~/.config/rofi
+print-usage() {
+	cat <<- EOF
+		USAGE: ${0##*/} [OPTION]
 
+		Launch a Rofi menu based on the option passed
+
+		OPTIONS:
+		    a    app launcher
+		    m    emoji picker
+		    v    clipboard
+		    w    window switcher
+		    x    calculator
+	EOF
+	exit 1
+}
+
+main() {
+	local rdir=$HOME/.config/rofi
 	case $1 in
-		'A')
-			# App launcher
+		'a') # app launcher
 			pkill rofi ||
-				  rofi -show drun -disable-history -show-icons \
-					   -config "$rdir/app-launcher.rasi"
+			      rofi -show drun       \
+			           -show-icons      \
+			           -disable-history \
+			           -config "$rdir/app-launcher.rasi"
 			;;
-		'V')
-			# Clipboard
-			pkill rofi || cliphist list |
-				  rofi -dmenu -p ' ' -display-columns 2 \
-					   -config "$rdir/clipboard.rasi" | cliphist decode | wl-copy
-			;;
-		'X')
-			# Calculator
+		'm') # emoji picker
 			pkill rofi ||
-				  rofi -show calc -modi calc -no-show-match -no-sort \
-					   -no-history -lines 0 -terse -hint-welcome '' \
-					   -hint-result '' -kb-accept-entry '' \
-					   -config "$rdir/calculator.rasi"
+			      rofi -modi emoji             \
+			           -show emoji             \
+			           -emoji-format '{emoji}' \
+			           -kb-accept-alt ''       \
+			           -kb-custom-1 Ctrl+c     \
+			           -kb-secondary-copy ''   \
+			           -config "$rdir/emoji-picker.rasi"
 			;;
-		'M')
-			# Emoji picker
+		'v') # clipboard
 			pkill rofi ||
-				  rofi -modi emoji -show emoji -emoji-format '{emoji}' \
-					   -kb-accept-alt '' -kb-secondary-copy '' \
-					   -kb-custom-1 Ctrl+c -config "$rdir/emoji-picker.rasi"
+			cliphist list |
+			      rofi -dmenu             \
+			           -display-columns 2 \
+			           -p ' '            \
+			           -config "$rdir/clipboard.rasi" |
+			cliphist decode |
+			wl-copy
 			;;
-		'W')
-			# Window switcher
-			pkill rofi || rofi -show window -config "$rdir/window-switcher.rasi"
+		'w') # window switcher
+			pkill rofi ||
+			      rofi -show window \
+			           -config "$rdir/window-switcher.rasi"
 			;;
-		*) exit 1 ;;
+		'x') # calculator
+			pkill rofi ||
+			      rofi -show calc          \
+			           -modi calc          \
+			           -hint-welcome ''    \
+			           -hint-result ''     \
+			           -kb-accept-entry '' \
+			           -lines 0            \
+			           -no-history         \
+			           -no-show-match      \
+			           -no-sort            \
+			           -terse              \
+			           -config "$rdir/calculator.rasi"
+			;;
+		*) print-usage ;;
 	esac
 }
 
