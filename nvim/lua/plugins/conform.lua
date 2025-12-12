@@ -25,8 +25,8 @@ return {
 	opts = {
 		formatters_by_ft = {
 			c = { "clang-format" },
-			-- css = { "prettierd" },
-			-- html = { "prettierd" },
+			css = { "prettierd" },
+			html = { "prettierd" },
 			javascript = { "prettierd" },
 			lua = { "stylua" },
 			markdown = { "prettierd" },
