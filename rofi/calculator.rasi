@@ -27,6 +27,7 @@ mainbox {
 }
 
 textbox-custom {
+	font:                   "Commit Mono Nerd Font Bold 12";
 	horizontal-align:       0.5;
 	padding:                2px 0;
 	background-color:       @select-bg;

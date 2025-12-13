@@ -5,7 +5,7 @@
 configuration {
 	font:                   "Commit Mono Nerd Font 12";
 	display-drun:           " ";
-	drun-display-format:    "{name}";
+	drun-display-format:    "[<span weight='bold'>{name}</span>] [<span alpha='80%' weight='light'><i>({generic})</i></span>]";
 }
 
 /* window */
@@ -28,6 +28,7 @@ mainbox {
 }
 
 textbox-custom {
+	font:                   "Commit Mono Nerd Font Bold 12";
 	horizontal-align:       0.5;
 	padding:                2px 0;
 	background-color:       @select-bg;
@@ -42,8 +43,8 @@ listview {
 	border:                 2px 0 0;
 	border-radius:          10px;
 	border-color:           @main-br;
-	lines:                  8;
-	fixed-height:           false;
+	lines:                  9;
+	fixed-height:           true;
 	dynamic:                false;
 	cycle:                  true;
 	margin:                 0 0 -4px;

@@ -30,14 +30,13 @@ print-usage() {
 }
 
 main() {
-	local rdir=$HOME/.config/rofi
 	case $1 in
 		'a') # app launcher
 			pkill rofi ||
 			      rofi -show drun       \
 			           -show-icons      \
 			           -disable-history \
-			           -config "$rdir/app-launcher.rasi"
+			           -config "$HOME/.config/rofi/app-launcher.rasi"
 			;;
 		'm') # emoji picker
 			pkill rofi ||
@@ -47,7 +46,7 @@ main() {
 			           -kb-accept-alt ''       \
 			           -kb-custom-1 Ctrl+c     \
 			           -kb-secondary-copy ''   \
-			           -config "$rdir/emoji-picker.rasi"
+			           -config "$HOME/.config/rofi/emoji-picker.rasi"
 			;;
 		'v') # clipboard
 			pkill rofi ||
@@ -55,14 +54,14 @@ main() {
 			      rofi -dmenu             \
 			           -display-columns 2 \
 			           -p ' '            \
-			           -config "$rdir/clipboard.rasi" |
+			           -config "$HOME/.config/rofi/clipboard.rasi" |
 			cliphist decode |
 			wl-copy
 			;;
 		'w') # window switcher
 			pkill rofi ||
 			      rofi -show window \
-			           -config "$rdir/window-switcher.rasi"
+			           -config "$HOME/.config/rofi/window-switcher.rasi"
 			;;
 		'x') # calculator
 			pkill rofi ||
@@ -76,7 +75,7 @@ main() {
 			           -no-show-match      \
 			           -no-sort            \
 			           -terse              \
-			           -config "$rdir/calculator.rasi"
+			           -config "$HOME/.config/rofi/calculator.rasi"
 			;;
 		*) print-usage ;;
 	esac

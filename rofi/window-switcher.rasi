@@ -4,7 +4,7 @@
 
 configuration {
 	font:                   "Commit Mono Nerd Font 12";
-	window-format:          "{c:10} :: {t}";
+	window-format:          "<span weight='bold'>{c:10}</span> <span alpha='80%' weight='light'><i>{t}</i></span>";
 }
 
 /* window */
@@ -28,6 +28,7 @@ mainbox {
 }
 
 textbox-custom {
+	font:                   "Commit Mono Nerd Font Bold 12";
 	horizontal-align:       0.5;
 	padding:                2px 0;
 	background-color:       @select-bg;
