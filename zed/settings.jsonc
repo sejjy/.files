@@ -1,0 +1,97 @@
+// zed settings
+// docs: https://zed.dev/docs/configuring-zed
+// default: `zed: open default settings`
+{
+	"buffer_font_family": "CommitMono Nerd Font",
+	"buffer_font_size": 18.0,
+	"buffer_font_weight": 500.0,
+	"buffer_line_height": "standard",
+	"cursor_shape": "block",
+	"current_line_highlight": "line",
+	"disable_ai": true,
+	"ensure_final_newline_on_save": false,
+	"format_on_save": "off",
+	"hard_tabs": true,
+	"icon_theme": "Catppuccin Mocha",
+	"middle_click_paste": false,
+	"relative_line_numbers": "enabled",
+	"remove_trailing_whitespace_on_save": false,
+	"rounded_selection": false,
+	"scroll_beyond_last_line": "vertical_scroll_margin",
+	"show_whitespaces": "trailing",
+	"tab_size": 4,
+	"theme": "Catppuccin Mocha - No Italics",
+	"ui_font_family": "CommitMono Nerd Font",
+	"ui_font_size": 20.0,
+	"ui_font_weight": 500.0,
+	"use_autoclose": false,
+	"use_auto_surround": false,
+	"use_smartcase_search": true,
+	"use_system_prompts": false,
+	"vertical_scroll_margin": 10.0,
+	"vim_mode": true,
+	"completions": {
+		"words_min_length": 1
+	},
+	"file_scan_exclusions": [
+		"**/.svn",
+		"**/.hg",
+		"**/.jj",
+		"**/CVS",
+		"**/.DS_Store",
+		"**/Thumbs.db",
+		"**/.classpath",
+		"**/.settings"
+	],
+	"git": {
+		"inline_blame": {
+			"delay_ms": 300,
+			"padding": 3
+		}
+	},
+	"gutter": {
+		"breakpoints": false,
+		"runnables": false
+	},
+	"project_panel": {
+		"default_width": 350.0,
+		"dock": "right",
+		"entry_spacing": "standard",
+		"hide_hidden": false
+	},
+	"terminal": {
+		"default_height": 250.0,
+		"font_weight": 500.0,
+		"shell": {
+			"program": "bash"
+		}
+	},
+	"whitespace_map": {
+		"space": "",
+		"tab": " "
+	},
+	"collaboration_panel": {
+		"button": false
+	},
+	"git_panel": {
+		"default_width": 350.0,
+		"dock": "right"
+	},
+	"notification_panel": {
+		"default_width": 350.0
+	},
+	"outline_panel": {
+		"default_width": 350.0,
+		"dock": "right"
+	},
+	"tabs": {
+		"close_position": "left",
+		"show_close_button": "hidden"
+	},
+	"tab_bar": {
+		"show_nav_history_buttons": false
+	},
+	"title_bar": {
+		"show_sign_in": false
+	}
+}

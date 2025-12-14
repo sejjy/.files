@@ -1,0 +1,10 @@
+// zed keymap
+// docs: https://zed.dev/docs/key-bindings
+// default: `zed: open default keymap`
+[
+	{
+		"bindings": {
+			"ctrl-k ctrl-o": "workspace::Open"
+		}
+	}
+]
