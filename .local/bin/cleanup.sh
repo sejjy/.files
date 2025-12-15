@@ -21,17 +21,15 @@ remove-orphans() {
 clear-cache() {
 	printf '\n%bClearing package cache...%b\n' "$BLU" "$RST"
 
-	sudo paccache -rk2 2> /dev/null
-	sudo paccache -ruk0 2> /dev/null
+	sudo paccache -rk1  # retain only one past version
+	sudo paccache -ruk0 # remove all cached versions of uninstalled packages
 
 	printf '\n%bPruning old AUR package cache...%b\n' "$BLU" "$RST"
 
-	local ycdir=~/.cache/yay
-	if [[ -d $ycdir ]]; then
-		paccache -rk2 --cachedir "$ycdir"
-		yay -Sc --noconfirm
+	if [[ -d "$HOME/.cache/yay" ]]; then
+		paccache -rk1 --cachedir "$HOME/.cache/yay"
 	else
-		printf '\n%bYay cache directory not found.%b\n' "$RED" "$RST"
+		printf '%bYay cache directory not found.%b\n' "$RED" "$RST"
 	fi
 }
 

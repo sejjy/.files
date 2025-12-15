@@ -10,27 +10,18 @@
 #
 # ACTION=="change", SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ATTR{online}=="1", RUN+="/usr/bin/su <user> -c '/home/<user>/.local/bin/battery.sh charging'"
 # ACTION=="change", SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ATTR{online}=="0", RUN+="/usr/bin/su <user> -c '/home/<user>/.local/bin/battery.sh discharging'"
-#
-# Reload udev rules by running:
-# sudo udevadm control --reload
 
 export DBUS_SESSION_BUS_ADDRESS='unix:path=/run/user/1000/bus'
 
 main() {
-	local path
+	local path level
 	path=$(upower -e | grep -m 1 'BAT')
-
-	local level
 	level=$(upower -i "$path" | awk '/percentage:/ {print $2}')
 	level=${level%\%}
 
-	local icon='battery-'
-	if ((level == 100)); then
-		icon+='100'
-	else
-		local icon_level=$(((level / 10) * 10))
-		icon+=$(printf '%03d' "$icon_level")
-	fi
+	local floor icon
+	floor=$((level / 10 * 10))
+	icon=$(printf 'battery-%03d' $floor)
 
 	local state=$1
 	if [[ $state == 'charging' ]]; then
