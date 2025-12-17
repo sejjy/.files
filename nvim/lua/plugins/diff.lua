@@ -8,4 +8,20 @@ return {
 	keys = {
 		{ "<Leader>v", ":CodeDiff<Enter>", desc = "[v]scode-diff" },
 	},
+
+	config = function()
+		require("vscode-diff").setup({
+			explorer = {
+				view_mode = "tree",
+				position = "right",
+				width = 38,
+				indent_markers = true,
+
+				icons = {
+					folder_closed = "󰉋",
+					folder_open = "󰝰",
+				},
+			},
+		})
+	end,
 }

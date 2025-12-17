@@ -13,7 +13,7 @@ main() {
 	case $status in
 		'Playing') icon='󰐊' ;;
 		'Paused') icon='󰏤' ;;
-		*) exit ;;
+		*) exit 0 ;;
 	esac
 
 	local title artist

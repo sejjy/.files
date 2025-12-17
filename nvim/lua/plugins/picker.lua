@@ -9,7 +9,7 @@ return {
 			formatters = { file = { filename_first = true } },
 
 			icons = {
-				undo = { saved = "" },
+				undo = { saved = "󰆓" },
 				ui = { selected = " ", unselected = " " },
 			},
 

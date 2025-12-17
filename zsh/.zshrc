@@ -54,14 +54,13 @@ bindkey '^ ' autosuggest-accept
 # shell
 alias reload='exec zsh'
 alias c='clear'
-alias e='y'  # yazi
-alias z='cd' # zoxide
 alias :q='exit'
 
 # file
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
+alias cx='chmod +x'
 alias mkdir='mkdir -p'
 
 # list
@@ -69,12 +68,12 @@ alias ls='ls --color=auto --group-directories-first'
 alias la='ls -A'
 alias ll='ls -alh'
 
-# alt
+# find
 alias find='fd'
 alias fd='fd --hidden --exclude timeshift'
 alias fdf='fd --type file'
 alias fdd='fd --type dir'
-alias grep='rg'
+# alias grep='rg'
 
 # pacman
 alias pup='sudo pacman -Syu'
@@ -139,9 +138,12 @@ alias tc='tmux clearhist'
 
 # scripts
 alias clean="$HOME/.local/bin/cleanup.sh"
+alias nitch="$HOME/dev/github/others/nitch/nitch"
 alias server="$HOME/.local/bin/server.sh"
 
 # misc
+alias e='y'  # yazi
+alias z='cd' # zoxide
 alias discord='discord --ozone-platform-hint=auto'
 alias np="playerctl metadata -af '{{ title }} - {{ artist }}'"
 
@@ -233,4 +235,9 @@ function y() {
 	IFS= read -r -d '' cwd < "$tmp"
 	[[ -n "$cwd" ]] && [[ "$cwd" != "$PWD" ]] && builtin cd -- "$cwd"
 	rm -f -- "$tmp"
+}
+
+# bash `help` builtin
+function help() {
+	bash -c 'help "$1"' bash "$1"
 }
