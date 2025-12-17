@@ -1,0 +1,7 @@
+{
+	"shebang": {
+		"prefix": "bang",
+		"body": "#!/usr/bin/env bash",
+		"description": "Add a Bash shebang."
+	}
+}
