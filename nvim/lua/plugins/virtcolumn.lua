@@ -1,7 +1,7 @@
 return {
 	"marchyman/virt-column.nvim",
 
-	event = "VeryLazy",
+	event = "BufReadPost",
 
 	config = function()
 		local function toggle_colorcolumn()
