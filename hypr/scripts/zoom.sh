@@ -7,14 +7,12 @@ zoom() {
 }
 
 main() {
-	local value=$1
-
 	# Match only digits with an optional `.`
-	if [[ $value =~ ^[+-]?[0-9]+\.?[0-9]*$ ]]; then
-		zoom "$value"
+	if [[ $1 =~ ^[+-]?[0-9]+\.?[0-9]*$ ]]; then
+		zoom "$1"
 	else
 		hyprctl keyword cursor:zoom_factor 1.0
-		echo 'cursor:zoom_factor set to 1.0'
+		printf "cursor:zoom_factor set to 1.0\n"
 	fi
 }
 

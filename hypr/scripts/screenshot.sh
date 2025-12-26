@@ -2,14 +2,13 @@
 #
 # Take a screenshot of the target passed
 #
-# Author: Jesse Mirabel <sejjymvm@gmail.com>
-# Created: January 2, 2025
+# Author:  Jesse Mirabel <sejjymvm@gmail.com>
+# Date:    January 2, 2025
 # License: MIT
 
-SDIR=$HOME/Pictures/Screenshots
-
-if [[ ! -d $SDIR ]]; then
-	mkdir -p "$SDIR"
+DIR="$HOME/Pictures/Screenshots"
+if [[ ! -d $DIR ]]; then
+	mkdir -p "$DIR"
 fi
 
 print-usage() {
@@ -28,14 +27,13 @@ print-usage() {
 }
 
 main() {
-	local name
+	local name file
 	name="Screenshot_$(date +%Y%m%d_%H%M%S_%2N).png"
-	local file="$SDIR/$name"
+	file="$DIR/$name"
 
-	local target=$1
-	case $target in
-		'area') grimblast --freeze copysave "$target" "$file" ;;
-		'active' | 'output' | 'screen') grimblast copysave "$target" "$file" ;;
+	case $1 in
+		"area") grimblast --freeze copysave "$1" "$file" ;;
+		"active" | "output" | "screen") grimblast copysave "$1" "$file" ;;
 		*) print-usage ;;
 	esac
 
@@ -44,7 +42,7 @@ main() {
 		exit 1
 	fi
 
-	notify-send "$name saved in $SDIR" -i "$file"
+	notify-send "$name saved in $DIR" -i "$file"
 }
 
 main "$@"

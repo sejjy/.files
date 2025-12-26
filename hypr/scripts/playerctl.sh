@@ -8,25 +8,25 @@ get-output() {
 
 main() {
 	local status
-	status=$(get-output 'status')
+	status=$(get-output "status")
 
 	case $status in
-		'Playing') icon='󰐊' ;;
-		'Paused') icon='󰏤' ;;
+		"Playing") icon="󰐊" ;;
+		"Paused") icon="󰏤" ;;
 		*) exit 0 ;;
 	esac
 
-	local title artist
-	title=$(get-output 'title')
-	artist=$(get-output 'artist')
+	local title artist track
+	title=$(get-output "title")
+	artist=$(get-output "artist")
+	track="$title — $artist"
 
-	local track="$title — $artist"
 	if ((${#track} > MAXLEN)); then
 		track=${track:0:MAXLEN}
-		track+='…'
+		track+="…"
 	fi
 
-	echo "$icon $track"
+	printf "%s" "$icon $track"
 }
 
 main

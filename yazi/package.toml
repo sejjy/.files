@@ -1,26 +1,26 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "19dc890"
+rev = "7ca66b4"
 hash = "3996fc74044bc44144b323686f887e1"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "19dc890"
-hash = "27ca02f49fd236b5cc7bf03c243859fe"
+rev = "7ca66b4"
+hash = "d2aa1b2f32c8b4fd1775e8f5c45f8fab"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:jump-to-char"
-rev = "19dc890"
+rev = "7ca66b4"
 hash = "ce67445ebb1bf3d97b8e44f50904b2c5"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "19dc890"
+rev = "7ca66b4"
 hash = "4fccaaf10c36dc2466e2438a386ff017"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:no-status"
-rev = "19dc890"
+rev = "7ca66b4"
 hash = "3e023d31f29201efdac2a6ae35fedb78"
 
 [flavor]
