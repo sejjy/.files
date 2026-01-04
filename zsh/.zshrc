@@ -138,7 +138,7 @@ alias tc='tmux clearhist'
 
 # scripts
 alias clean="$HOME/.local/bin/cleanup.sh"
-alias nitch="$HOME/dev/github/others/nitch/nitch"
+alias nitch="$HOME/dev/github/random/nitch/nitch"
 alias server="$HOME/.local/bin/server.sh"
 
 # misc
