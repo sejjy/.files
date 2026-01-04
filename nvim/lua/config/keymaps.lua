@@ -50,7 +50,7 @@ vim.keymap.set("n", "<Leader>b", ':silent !zen-browser "%"<Enter>', { desc = "op
 -- Misc
 vim.keymap.set("n", "<Esc>", ":nohlsearch<Enter>", { silent = true })
 vim.keymap.set("n", "<Leader>ts", ":set spell!<Enter>", { desc = "toggle [s]pell check" })
-vim.keymap.set("n", "<Leader>rn", ":%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>", { desc = "re[n]ame" })
+vim.keymap.set("n", "<Leader>rn", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "re[n]ame" })
 
 -- Indent buffer without changing view
 vim.keymap.set("n", "<Leader>=", function()
