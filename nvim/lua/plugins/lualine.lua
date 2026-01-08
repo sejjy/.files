@@ -40,6 +40,7 @@ return {
 					{
 						"filetype",
 						icon_only = true,
+						color = { bg = mocha.mantle },
 						padding = 0,
 						separator = "",
 					},
@@ -52,6 +53,7 @@ return {
 					{
 						"diff",
 						symbols = { added = "󰐗 ", removed = "󰍶 ", modified = "󰻂 " },
+						color = { bg = mocha.mantle },
 						diff_color = { modified = { fg = mocha.blue } },
 						fmt = trunc(0, 0, 120, true),
 					},
@@ -61,12 +63,14 @@ return {
 					{
 						"diagnostics",
 						symbols = { error = "󰅙 ", warn = "󰀦 ", info = "󰋼 ", hint = "󰋗 " },
+						color = { bg = mocha.mantle },
 						separator = ":",
 						fmt = trunc(0, 0, 120, true),
 					},
 					{
 						"lsp_status",
 						icon = "",
+						color = { bg = mocha.mantle },
 						symbols = { spinner = "", done = "", separator = ", " },
 						padding = { right = 1 },
 						fmt = trunc(160, 20, 80, false),
@@ -106,5 +110,7 @@ return {
 
 		-- remove outer separator bg color
 		vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE" })
+		vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "NONE" })
+		vim.api.nvim_set_hl(0, "lualine_c_normal", { bg = mocha.mantle })
 	end,
 }
