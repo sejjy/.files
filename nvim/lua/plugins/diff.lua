@@ -1,12 +1,14 @@
 return {
 	"esmuellert/vscode-diff.nvim",
 
+	enabled = false,
+
 	dependencies = { "MunifTanjim/nui.nvim" },
 
 	cmd = "CodeDiff",
 
 	keys = {
-		{ "<Leader>v", ":CodeDiff<Enter>", desc = "[v]scode-diff" },
+		{ "<Leader>v", ":CodeDiff<Enter>", desc = "[v]iew diff" },
 	},
 
 	config = function()

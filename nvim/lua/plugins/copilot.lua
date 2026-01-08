@@ -1,6 +1,8 @@
 return {
 	"zbirenbaum/copilot.lua",
 
+	enabled = false,
+
 	cmd = "Copilot",
 
 	keys = {
