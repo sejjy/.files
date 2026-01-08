@@ -1,4 +1,5 @@
 -- Highlight cursorline
+--[[
 local cursor_group = vim.api.nvim_create_augroup("CursorGroup", { clear = true })
 
 vim.api.nvim_create_autocmd("InsertLeave", {
@@ -14,6 +15,7 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 		vim.opt.cursorline = false
 	end,
 })
+--]]
 
 -- Save folds
 local fold_group = vim.api.nvim_create_augroup("FoldGroup", { clear = true })
